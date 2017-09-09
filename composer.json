@@ -1,0 +1,27 @@
+{
+  "name": "divante/pimcoredevkit",
+  "type": "pimcore-bundle",
+  "license": "GPLv3",
+  "description": "Devkit is a set of command-line tools helping you develop your Pimcore application.",
+  "keywords": [
+    "pimcore",
+    "pimcore-plugin"
+  ],
+  "homepage": "https://divante.co",
+  "authors": [
+    {
+      "name": "Jakub Płaskonka",
+      "email": "jplaskonka@divante.pl",
+      "homepage": "https://divante.co",
+      "role": "Developer"
+    }
+  ],
+  "extra": {
+    "pimcore": {
+      "bundles": [
+        "Divante\\PimcoreDevkitBundle"
+      ]
+    }
+  }
+}
+ 
