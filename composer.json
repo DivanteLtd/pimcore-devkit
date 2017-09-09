@@ -1,5 +1,5 @@
 {
-  "name": "divante/pimcoredevkit",
+  "name": "divanteltd/pimcoredevkit",
   "type": "pimcore-bundle",
   "license": "GPLv3",
   "description": "Devkit is a set of command-line tools helping you develop your Pimcore application.",
@@ -16,10 +16,15 @@
       "role": "Developer"
     }
   ],
+  "autoload": {
+    "psr-4": {
+      "PimcoreDevkitBundle\\": "src/"
+    }
+  },
   "extra": {
     "pimcore": {
       "bundles": [
-        "Divante\\PimcoreDevkitBundle"
+        "PimcoreDevkitBundle\\PimcoreDevkitBundle"
       ]
     }
   }

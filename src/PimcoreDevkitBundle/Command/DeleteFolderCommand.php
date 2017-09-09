@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2017 Divante Ltd. (https://divante.co)
  */
 
-namespace Divante\PimcoreDevkitBundle\Command;
+namespace PimcoreDevkitBundle\Command;
 
 use Pimcore\Console\AbstractCommand;
 use Pimcore\Model\Object\Folder;
