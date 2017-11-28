@@ -2,3 +2,5 @@ services:
 #    divante_pimcore_devkit.example:
 #        class: Divante\PimcoreDevkitBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    PimcoreDevkitBundle\Service\WorkflowService: ~
