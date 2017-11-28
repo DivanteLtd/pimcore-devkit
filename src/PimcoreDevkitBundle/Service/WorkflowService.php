@@ -25,7 +25,7 @@ class WorkflowService
     public function createFromFile(string $filePath, array $customValues = [])
     {
         $values = $this->getValues($filePath);
-        $values = array_merge($values, $customValues);
+        $values = array_merge_recursive($values, $customValues);
 
         $workflow = new Workflow();
         $workflow->setValues($values);
