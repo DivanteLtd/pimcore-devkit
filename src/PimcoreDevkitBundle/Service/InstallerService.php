@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace PimcoreDevkitBundle\Tool;
+namespace PimcoreDevkitBundle\Service;
 
 use Pimcore\Model\DataObject\ClassDefinition;
 use Pimcore\Model\DataObject;
@@ -16,7 +16,7 @@ use Pimcore\Model\WebsiteSetting;
 /**
  * Class InstallerService
  *
- * @package PimcoreDevkitBundle\Tool
+ * @package PimcoreDevkitBundle\Service
  */
 class InstallerService
 {
