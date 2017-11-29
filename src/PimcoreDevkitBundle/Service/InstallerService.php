@@ -58,9 +58,9 @@ class InstallerService
         $class = ClassDefinition::getByName($name);
         if (!$class instanceof ClassDefinition) {
             $class = ClassDefinition::create(['name' => $name, 'userOwner' => 0]);
-            $json = $this->jsonGetContents($jsonFilePath);
-            ClassDefinition\Service::importClassDefinitionFromJson($class, $json, true);
         }
+        $json = $this->jsonGetContents($jsonFilePath);
+        ClassDefinition\Service::importClassDefinitionFromJson($class, $json, true);
     }
 
     /**
