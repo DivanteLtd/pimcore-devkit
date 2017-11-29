@@ -52,15 +52,24 @@ class InstallerService
     /**
      * @param string $name
      * @param string $jsonFilePath
+     * @return bool
      */
     public function createClassDefinition(string $name, string $jsonFilePath)
     {
-        $class = ClassDefinition::getByName($name);
-        if (!$class instanceof ClassDefinition) {
+        $class = null;
+        try {
+            $class = ClassDefinition::getByName($name);
+        } catch (\Exception $e) {
+            // ignore
+        }
+        if (false === $class instanceof ClassDefinition) {
             $class = ClassDefinition::create(['name' => $name, 'userOwner' => 0]);
         }
-        $json = $this->jsonGetContents($jsonFilePath);
-        ClassDefinition\Service::importClassDefinitionFromJson($class, $json, true);
+
+        $json = file_get_contents($jsonFilePath);
+        $success = ClassDefinition\Service::importClassDefinitionFromJson($class, $json);
+
+        return $success;
     }
 
     /**
@@ -119,21 +128,5 @@ class InstallerService
     public function createPermission(string $permission)
     {
         \Pimcore\Model\User\Permission\Definition::create($permission);
-    }
-
-    /**
-     * @param string $jsonFilePath
-     * @return string
-     * @throws \UnexpectedValueException
-     */
-    protected function jsonGetContents(string $jsonFilePath) : string
-    {
-        $contents = file_get_contents($jsonFilePath);
-
-        if (!is_string($contents)) {
-            throw new \UnexpectedValueException();
-        }
-
-        return $contents;
     }
 }
