@@ -19,6 +19,39 @@ use Pimcore\Model\Workflow;
 class WorkflowService
 {
     /**
+     * @param int $classId
+     * @return int
+     */
+    public function countByClassId(int $classId) : int
+    {
+        $listing = new Workflow\Listing();
+        $listing->setFilter($this->getClassIdFilter($classId));
+        return $listing->getTotalCount();
+    }
+
+    /**
+     * @param int $classId
+     * @return array
+     */
+    public function getByClassId(int $classId) : array
+    {
+        $listing = new Workflow\Listing();
+        $listing->setFilter($this->getClassIdFilter($classId));
+        return $listing->load();
+    }
+
+    /**
+     * @param int $classId
+     * @return callable
+     */
+    protected function getClassIdFilter(int $classId) : callable
+    {
+        return function (array $row) use ($classId) : bool {
+            return in_array($classId, $row['workflowSubject']['classes']);
+        };
+    }
+
+    /**
      * @param string $filePath
      * @param array $customValues
      */
