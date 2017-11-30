@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace PimcoreDevkitBundle\Service;
 
 use Pimcore\Model\DataObject\ClassDefinition;
-use Pimcore\Model\DataObject;
+use Pimcore\Model\DataObject\Folder;
 use Pimcore\Model\WebsiteSetting;
 
 /**
@@ -24,20 +24,22 @@ class InstallerService
      * @param string $wsName
      * @param int $parentId
      * @param string $key
-     * @return DataObject\Folder
+     * @return Folder
+     * @throws \Exception
      */
     public function createDataObjectFolderAndWebsiteSettings(string $wsName, int $parentId, string $key)
     {
         $setting = WebsiteSetting::getByName($wsName);
 
         if ($setting instanceof WebsiteSetting && $setting->getData()) {
-            $folder = DataObject\Folder::getById($setting->getData());
-            if ($folder instanceof DataObject\Folder) {
+            $folder = Folder::getById($setting->getData());
+            if ($folder instanceof Folder) {
                 return $folder;
             }
         }
 
-        $folder = $this->getOrCreateObjectFolder($parentId, $key);
+        $dataObjectService = new DataObjectService();
+        $folder = $dataObjectService->getOrCreateObjectFolder($parentId, $key);
         $this->setWebsiteSetting(
             [
                 'name' => $wsName,
@@ -45,6 +47,10 @@ class InstallerService
                 'data' => $folder->getId(),
             ]
         );
+
+        if (!$folder instanceof Folder) {
+            throw new \Exception("Cannot get folder $key ");
+        }
 
         return $folder;
     }
@@ -90,36 +96,6 @@ class InstallerService
         $setting->save();
 
         return $setting;
-    }
-
-    /**
-     * Returns Object folder. If not existent, creates it.
-     *
-     * @param int $parentId
-     * @param string $key
-     * @return DataObject\Folder
-     * @internal param string $name
-     */
-    public function getOrCreateObjectFolder($parentId, $key)
-    {
-        $parent = DataObject::getById($parentId);
-        $key    = DataObject\Service::getValidKey($key, 'object');
-        $path   = $parent->getRealFullPath() . '/' . $key;
-
-        $folder = DataObject\Folder::getByPath($path);
-        if (!$folder instanceof DataObject\Folder) {
-            $folder = DataObject\Folder::create([
-                'o_parentId'         => $parentId,
-                'o_creationDate'     => time(),
-                'o_userOwner'        => 0,
-                'o_userModification' => 0,
-                'o_key'              => $key,
-                'o_published'        => true,
-                'o_locked'           => true,
-            ]);
-        }
-
-        return $folder;
     }
 
     /**
