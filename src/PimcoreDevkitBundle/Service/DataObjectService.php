@@ -50,26 +50,50 @@ class DataObjectService
         return $folder;
     }
 
-    public function getOrCreateDataObjectByField(
+    public function getOrCreateDataObject(
         $class,
-        $fieldName,
-        $fieldValue,
+        $searchData,
         $objectName,
         $objectFolder
     )
     {
-        $funcName = 'getBy' . $fieldName;
-        $object = $class::$funcName($fieldValue, 1);
+        $object = $this->findDataObject(
+            $class,
+            $searchData
+        );
+
         if (!$object instanceof $class) {
             $object = $this->createDataObject(
                 $class,
                 $objectName,
                 $objectFolder,
-                [
-                    $fieldName => $fieldValue
-                ]
+                $searchData
             );
         }
+
+        return $object;
+    }
+
+    public function findDataObject(
+        $class,
+        $searchData
+    )
+    {
+        $listingClass = $class . '\Listing';
+        /** @var DataObject\Listing $listing */
+        $listing = new $listingClass();
+        $conditions = [];
+        $data = [];
+        foreach ($searchData as $name => $value) {
+            $conditions[] = "$name = ?";
+            $data[] = $value;
+        }
+        $conditions = implode(' AND ', $conditions);
+
+        $listing->setCondition($conditions, $data);
+        $objects = $listing->getItems(0, 1);
+
+        $object = $objects[0];
 
         return $object;
     }
@@ -91,8 +115,12 @@ class DataObjectService
         $keyService = new KeyService();
         $key = $keyService->getFreeDataObjectKey($objectFolder, $objectName);
         $additionalData = [
-            'key'    => $key,
-            'parent' => $objectFolder,
+            'key'                => $key,
+            'parent'             => $objectFolder,
+            'o_published'        => true,
+            'o_creationDate'     => time(),
+            'o_userOwner'        => 0,
+            'o_userModification' => 0,
         ];
         $object = $class::create(array_merge($data, $additionalData));
         $object->save();
