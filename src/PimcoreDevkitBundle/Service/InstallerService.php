@@ -79,6 +79,24 @@ class InstallerService
     }
 
     /**
+     * @param string $name
+     * @return bool
+     */
+    public function removeClassDefinition(string $name)
+    {
+        $class = null;
+        try {
+            $class = ClassDefinition::getByName($name);
+            $class->delete();
+            return true;
+        } catch (\Exception $e) {
+            // ignore
+        }
+
+        return false;
+    }
+
+    /**
      * Creates or updates WebsiteSettings.
      *
      * @param array $params
