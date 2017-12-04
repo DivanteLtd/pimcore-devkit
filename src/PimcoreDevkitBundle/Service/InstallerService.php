@@ -87,8 +87,12 @@ class InstallerService
         $class = null;
         try {
             $class = ClassDefinition::getByName($name);
-            $class->delete();
-            return true;
+            if ($class) {
+                $class->delete();
+                return true;
+            }
+
+            return false;
         } catch (\Exception $e) {
             // ignore
         }
