@@ -9,3 +9,5 @@ services:
     PimcoreDevkitBundle\Service\DataObjectService: ~
     PimcoreDevkitBundle\Service\KeyService: ~
     PimcoreDevkitBundle\Service\SystemSettings: ~
+    PimcoreDevkitBundle\Service\UserService: ~
+    PimcoreDevkitBundle\Service\WorkspaceService: ~
