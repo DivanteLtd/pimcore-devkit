@@ -117,7 +117,7 @@ class DataObjectService
         $additionalData = [
             'key'                => $key,
             'parent'             => $objectFolder,
-            'o_published'        => true,
+            'o_published'        => false,
             'o_creationDate'     => time(),
             'o_userOwner'        => 0,
             'o_userModification' => 0,
