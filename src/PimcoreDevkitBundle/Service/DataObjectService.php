@@ -91,6 +91,7 @@ class DataObjectService
         $conditions = implode(' AND ', $conditions);
 
         $listing->setCondition($conditions, $data);
+        $listing->setUnpublished(true);
         $objects = $listing->getItems(0, 1);
 
         $object = $objects[0];
@@ -121,6 +122,7 @@ class DataObjectService
             'o_creationDate'     => time(),
             'o_userOwner'        => 0,
             'o_userModification' => 0,
+            'o_index'            => 0,
         ];
         $object = $class::create(array_merge($data, $additionalData));
         $object->save();
