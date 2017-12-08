@@ -1,6 +1,6 @@
 <?php
 /**
- * @category    Wurth
+ * @category    Pimcore 5 DevKit
  * @date        08/12/2017
  * @author      Korneliusz Kirsz <kkirsz@divante.pl>
  * @copyright   Copyright (c) 2017 DIVANTE (http://divante.pl)
