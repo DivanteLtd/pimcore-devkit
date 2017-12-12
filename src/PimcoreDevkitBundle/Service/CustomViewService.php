@@ -21,8 +21,9 @@ class CustomViewService extends AbstractService
     /**
      * @param string $filePath
      * @param array $customData
+     * @return CustomView
      */
-    public function createFromFile(string $filePath, array $customData = [])
+    public function createFromFile(string $filePath, array $customData = []) : CustomView
     {
         $data = $this->getDataFromFile($filePath);
         $data = array_merge_recursive($data, $customData);
@@ -30,5 +31,7 @@ class CustomViewService extends AbstractService
         $customView = new CustomView();
         $customView->setValues($data);
         $customView->save();
+        
+        return $customView;
     }
 }
