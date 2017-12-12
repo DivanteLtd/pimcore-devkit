@@ -16,7 +16,7 @@ use PimcoreDevkitBundle\Model\CustomView;
  * Class CustomViewService
  * @package PimcoreDevkitBundle\Service
  */
-class CustomViewService extends AbstractService
+class CustomViewService
 {
     /**
      * @param string $filePath
@@ -25,7 +25,7 @@ class CustomViewService extends AbstractService
      */
     public function createFromFile(string $filePath, array $customData = []) : CustomView
     {
-        $data = $this->getDataFromFile($filePath);
+        $data = include $filePath;
         $data = array_merge_recursive($data, $customData);
 
         $customView = new CustomView();
