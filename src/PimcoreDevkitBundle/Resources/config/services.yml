@@ -6,6 +6,7 @@ services:
     PimcoreDevkitBundle\Service\InstallerService: ~
     PimcoreDevkitBundle\Service\WorkflowService: ~
     PimcoreDevkitBundle\Service\ClassDefinitionService: ~
+    PimcoreDevkitBundle\Service\CustomViewService: ~
     PimcoreDevkitBundle\Service\DataObjectService: ~
     PimcoreDevkitBundle\Service\KeyService: ~
     PimcoreDevkitBundle\Service\SystemSettings: ~
