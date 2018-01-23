@@ -10,7 +10,8 @@ declare(strict_types=1);
 namespace PimcoreDevkitBundle\Service;
 
 use Pimcore\Model\DataObject\ClassDefinition;
-use Pimcore\Model\DataObject\Folder;
+use Pimcore\Model\DataObject\Folder as DataObject_Folder;
+use Pimcore\Model\Document\Folder as Document_Folder;
 use Pimcore\Model\WebsiteSetting;
 
 /**
@@ -24,7 +25,7 @@ class InstallerService
      * @param string $wsName
      * @param int $parentId
      * @param string $key
-     * @return Folder
+     * @return DataObject_Folder
      * @throws \Exception
      */
     public function createDataObjectFolderAndWebsiteSettings(string $wsName, int $parentId, string $key)
@@ -32,8 +33,8 @@ class InstallerService
         $setting = WebsiteSetting::getByName($wsName);
 
         if ($setting instanceof WebsiteSetting && $setting->getData()) {
-            $folder = Folder::getById($setting->getData());
-            if ($folder instanceof Folder) {
+            $folder = DataObject_Folder::getById($setting->getData());
+            if ($folder instanceof DataObject_Folder) {
                 return $folder;
             }
         }
@@ -48,8 +49,43 @@ class InstallerService
             ]
         );
 
-        if (!$folder instanceof Folder) {
+        if (!$folder instanceof DataObject_Folder) {
             throw new \Exception("Cannot get folder $key ");
+        }
+
+        return $folder;
+    }
+
+    /**
+     * @param string $wsName
+     * @param int $parentId
+     * @param string $key
+     * @return Document_Folder
+     * @throws \Exception
+     */
+    public function createDocumentFolderAndWebsiteSettings(string $wsName, int $parentId, string $key)
+    {
+        $setting = WebsiteSetting::getByName($wsName);
+
+        if ($setting instanceof WebsiteSetting && $setting->getData()) {
+            $folder = Document_Folder::getById($setting->getData());
+            if ($folder instanceof Document_Folder) {
+                return $folder;
+            }
+        }
+
+        $documentService = new DocumentService();
+        $folder = $documentService->getOrCreateDocumentFolder($parentId, $key);
+        $this->setWebsiteSetting(
+            [
+                'name' => $wsName,
+                'type' => 'document',
+                'data' => $folder->getId(),
+            ]
+        );
+
+        if (!$folder instanceof Document_Folder) {
+            throw new \Exception("Cannot get document folder $key ");
         }
 
         return $folder;
