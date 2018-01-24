@@ -1,6 +1,6 @@
 <?php
 /**
- * @date        23/01/2018
+ * @date        22/01/2018
  * @author      Wojciech Peisert <wpeisert@divante.pl>
  * @copyright   Copyright (c) 2018 DIVANTE (http://divante.pl)
  */
