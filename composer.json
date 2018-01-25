@@ -1,7 +1,7 @@
 {
   "name": "divanteltd/pimcoredevkit",
   "type": "pimcore-bundle",
-  "license": "GPLv3",
+  "license": "GPL-3.0-or-later",
   "description": "Devkit is a set of command-line tools helping you develop your Pimcore application.",
   "keywords": [
     "pimcore",
