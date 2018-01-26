@@ -11,6 +11,7 @@ namespace PimcoreDevkitBundle\Service;
 
 use Pimcore\Config;
 use Pimcore\File;
+use Pimcore\Model\Document\DocType;
 
 /**
  * Class DocTypeService
