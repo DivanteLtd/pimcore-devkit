@@ -13,3 +13,4 @@ services:
     PimcoreDevkitBundle\Service\UserService: ~
     PimcoreDevkitBundle\Service\WorkspaceService: ~
     PimcoreDevkitBundle\Service\DocTypeService: ~
+    PimcoreDevkitBundle\Service\AssetService: ~
