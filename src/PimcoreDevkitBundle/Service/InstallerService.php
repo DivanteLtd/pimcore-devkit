@@ -13,6 +13,7 @@ use Pimcore\Model\DataObject\ClassDefinition;
 use Pimcore\Model\DataObject\Folder as DataObject_Folder;
 use Pimcore\Model\Document\Folder as Document_Folder;
 use Pimcore\Model\Asset\Folder as Asset_Folder;
+use Pimcore\Model\Asset;
 use Pimcore\Model\WebsiteSetting;
 
 /**
@@ -135,7 +136,7 @@ class InstallerService
             ]
         );
 
-        if (!$folder instanceof Asset_Folder) {
+        if (!$folder instanceof Asset) {
             throw new \Exception("Cannot get asset folder $key ");
         }
 
