@@ -44,16 +44,20 @@ class ThumbnailConfigService
 ];
 */
     /**
-     * Create thumbnail config
+     * Create or update (by name) thumbnail config
      *
      * @param array $params
      * @return ThumbnailConfig
      */
-    public function createThumbnailConfig(array $config)
+    public function setThumbnailConfigByName(array $config)
     {
-        $thumbConfig = new ThumbnailConfig();
+        $name = $config['name'];
+        $thumbConfig = ThumbnailConfig::getByName($name);
+        if (false === $thumbConfig instanceof ThumbnailConfig) {
+            $thumbConfig = new ThumbnailConfig();
+        }
 
-        $thumbConfig->setName($config['name']);
+        $thumbConfig->setName($name);
 
         $settings = $config['settings'];
         if (is_array($settings)) {
@@ -62,6 +66,7 @@ class ThumbnailConfigService
             }
         }
 
+        $thumbConfig->resetItems();
         $mediaData = $config['mediaData'];
         if (is_array($mediaData)) {
             foreach ($mediaData as $mediaName => $items) {
@@ -72,6 +77,21 @@ class ThumbnailConfigService
         $thumbConfig->save();
 
         return $thumbConfig;
+    }
+
+    /**
+     * Silently delete thumbnail config by name
+     *
+     * @param string $name
+     * @return ThumbnailConfig
+     */
+    public function deleteThumbnailConfigByName(string $name)
+    {
+        $name = $config['name'];
+        $thumbConfig = ThumbnailConfig::getByName($name);
+        if (false !== $thumbConfig instanceof ThumbnailConfig) {
+            $thumbConfig->delete();
+        }
     }
 
     /**
