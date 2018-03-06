@@ -11,6 +11,7 @@ namespace PimcoreDevkitBundle\Service;
 
 use Pimcore\Model\Document\Folder;
 use Pimcore\Model\Document;
+use Pimcore\Model\Document\Page;
 use Pimcore\Model\Document\DocType;
 use Pimcore\Model\Document\Snippet;
 
@@ -91,5 +92,43 @@ class DocumentService
         $snippet->save();
 
         return $snippet;
+    }
+
+    /**
+     * Creates page from doctype and returns it.
+     *
+     * @param int $parentId
+     * @param string $key
+     * @param string $docTypeName
+     * @return Page
+     * @throws \Exception
+     */
+    public function createPageFromDocType(int $parentId, string $key, string $docTypeName): Page
+    {
+        $docTypeService = new DocTypeService();
+
+        $docType = $docTypeService->getDocTypeByName($docTypeName);
+        if (false === $docType instanceof DocType) {
+            throw new \Exception("Missing document type: '$docTypeName'");
+        }
+
+        $doc = new Page();
+
+        $doc->setParentId($parentId);
+        $doc->setKey($key);
+        $doc->setController($docType->getController());
+        $doc->setAction($docType->getAction());
+        $doc->setTemplate($docType->getTemplate());
+        $doc->setModule($docType->getModule());
+
+        $doc->setPublished(true);
+        $doc->setCreationDate(time());
+        $doc->setModificationDate(time());
+        $doc->setUserOwner(0);
+        $doc->setUserModification(0);
+
+        $doc->save();
+
+        return $doc;
     }
 }
