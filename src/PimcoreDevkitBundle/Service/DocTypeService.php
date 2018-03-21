@@ -39,5 +39,7 @@ class DocTypeService
         if (isset($docTypes[0])) {
             return $docTypes[0];
         }
+
+        return null;
     }
 }
