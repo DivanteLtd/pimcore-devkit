@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace PimcoreDevkitBundle\Service;
 
 use Pimcore\Model\DataObject\ClassDefinition;
+use Pimcore\Model\DataObject\Objectbrick\Definition as ObjectbrickDefinition;
 use Pimcore\Model\DataObject\Folder as DataObject_Folder;
 use Pimcore\Model\Document\Folder as Document_Folder;
 use Pimcore\Model\Asset\Folder as Asset_Folder;
@@ -186,6 +187,22 @@ class InstallerService
         }
 
         return false;
+    }
+
+    public function createObjectBrickDefinition(string $key, string $jsonFilePath)
+    {
+        try {
+            $brick = ObjectbrickDefinition::getByKey($key);
+        } catch (\Exception $e) {
+            $brick = new ObjectbrickDefinition();
+            $brick->setKey($key);
+        }
+
+        $json = file_get_contents($jsonFilePath);
+
+        $success = ClassDefinition\Service::importObjectBrickFromJson($brick, $json, true);
+
+        return $success;
     }
 
     /**
