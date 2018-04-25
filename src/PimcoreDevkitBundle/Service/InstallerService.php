@@ -192,9 +192,9 @@ class InstallerService
     public function createObjectBrickDefinition(string $key, string $jsonFilePath)
     {
         try {
-            $brick = DataObject\Objectbrick\Definition::getByKey($key);
+            $brick = ObjectbrickDefinition::getByKey($key);
         } catch (\Exception $e) {
-            $brick = new DataObject\Objectbrick\Definition();
+            $brick = new ObjectbrickDefinition();
             $brick->setKey($key);
         }
 
