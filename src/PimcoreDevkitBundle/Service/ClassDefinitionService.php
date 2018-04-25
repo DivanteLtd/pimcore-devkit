@@ -37,6 +37,21 @@ class ClassDefinitionService
     }
 
     /**
+     * @param ClassDefinition\Layout $definition
+     * @param callable $callback
+     * Will run $callback on every Data
+     */
+    public function traverseLayout(ClassDefinition\Layout &$layout, Callable $callback) {
+        $callback($layout);
+
+        foreach($layout->childs as $child) {
+            if ($child instanceof ClassDefinition\Layout) {
+                $this->traverseLayout($child, $callback);
+            }
+        }
+    }
+
+    /**
      * @param array $definition
      * @param string $name
      * @param $newValue
