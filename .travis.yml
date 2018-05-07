@@ -15,3 +15,4 @@ install:
 
 script:
   - composer validate --strict
+  - vendor/bin/phpcs src
