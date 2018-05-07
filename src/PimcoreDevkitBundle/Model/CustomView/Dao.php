@@ -2,19 +2,21 @@
 /**
  * @category    Pimcore 5 DevKit
  * @date        08/12/2017
+ *
  * @author      Korneliusz Kirsz <kkirsz@divante.pl>
  * @copyright   Copyright (c) 2017 DIVANTE (http://divante.pl)
  */
 
 namespace PimcoreDevkitBundle\Model\CustomView;
 
+use Pimcore\Config;
 use Pimcore\Model\Dao\DaoInterface;
 use Pimcore\Model\Dao\DaoTrait;
-use Pimcore\Config;
 use PimcoreDevkitBundle\Db\CustomViews;
 
 /**
  * Class Dao
+ *
  * @package PimcoreDevkitBundle\Model\CustomView
  */
 class Dao implements DaoInterface
@@ -26,9 +28,6 @@ class Dao implements DaoInterface
      */
     protected $db;
 
-    /**
-     *
-     */
     public function configure()
     {
         $this->setFile('customviews');
@@ -36,11 +35,12 @@ class Dao implements DaoInterface
 
     /**
      * @param int $id
+     *
      * @throws \Exception
      */
     public function getById($id = null)
     {
-        if ($id != null) {
+        if (null != $id) {
             $this->model->setId($id);
         }
 
@@ -49,7 +49,7 @@ class Dao implements DaoInterface
         if (isset($data['id'])) {
             $this->assignVariablesToModel($data);
         } else {
-            throw new \Exception('Custom view with id: ' . $this->model->getId() . ' does not exist');
+            throw new \Exception('Custom view with id: '.$this->model->getId().' does not exist');
         }
     }
 
@@ -76,9 +76,6 @@ class Dao implements DaoInterface
         }
     }
 
-    /**
-     *
-     */
     public function delete()
     {
         $this->db->delete($this->model->getId());
@@ -89,7 +86,7 @@ class Dao implements DaoInterface
      */
     protected function setFile($name)
     {
-        $file = Config::locateConfigFile($name . '.php');
+        $file = Config::locateConfigFile($name.'.php');
         $this->db = CustomViews::get($file);
     }
 }

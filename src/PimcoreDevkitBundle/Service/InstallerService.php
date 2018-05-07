@@ -1,6 +1,7 @@
 <?php
 /**
  * @date        02/11/2017
+ *
  * @author      Korneliusz Kirsz <kkirsz@divante.pl>
  * @copyright   Copyright (c) 2017 DIVANTE (http://divante.pl)
  */
@@ -9,12 +10,12 @@ declare(strict_types=1);
 
 namespace PimcoreDevkitBundle\Service;
 
-use Pimcore\Model\DataObject\ClassDefinition;
-use Pimcore\Model\DataObject\Objectbrick\Definition as ObjectbrickDefinition;
-use Pimcore\Model\DataObject\Folder as DataObject_Folder;
-use Pimcore\Model\Document\Folder as Document_Folder;
-use Pimcore\Model\Asset\Folder as Asset_Folder;
 use Pimcore\Model\Asset;
+use Pimcore\Model\Asset\Folder as Asset_Folder;
+use Pimcore\Model\DataObject\ClassDefinition;
+use Pimcore\Model\DataObject\Folder as DataObject_Folder;
+use Pimcore\Model\DataObject\Objectbrick\Definition as ObjectbrickDefinition;
+use Pimcore\Model\Document\Folder as Document_Folder;
 use Pimcore\Model\WebsiteSetting;
 
 /**
@@ -26,10 +27,12 @@ class InstallerService
 {
     /**
      * @param string $wsName
-     * @param int $parentId
+     * @param int    $parentId
      * @param string $key
-     * @return DataObject_Folder
+     *
      * @throws \Exception
+     *
+     * @return DataObject_Folder
      */
     public function createDataObjectFolderAndWebsiteSettings(string $wsName, int $parentId, string $key)
     {
@@ -66,10 +69,12 @@ class InstallerService
 
     /**
      * @param string $wsName
-     * @param int $parentId
+     * @param int    $parentId
      * @param string $key
-     * @return Document_Folder
+     *
      * @throws \Exception
+     *
+     * @return Document_Folder
      */
     public function createDocumentFolderAndWebsiteSettings(string $wsName, int $parentId, string $key)
     {
@@ -106,10 +111,12 @@ class InstallerService
 
     /**
      * @param string $wsName
-     * @param int $parentId
+     * @param int    $parentId
      * @param string $key
-     * @return Asset_Folder
+     *
      * @throws \Exception
+     *
+     * @return Asset_Folder
      */
     public function createAssetFolderAndWebsiteSettings(string $wsName, int $parentId, string $key)
     {
@@ -147,6 +154,7 @@ class InstallerService
     /**
      * @param string $name
      * @param string $jsonFilePath
+     *
      * @return bool
      */
     public function createClassDefinition(string $name, string $jsonFilePath)
@@ -169,6 +177,7 @@ class InstallerService
 
     /**
      * @param string $name
+     *
      * @return bool
      */
     public function removeClassDefinition(string $name)
@@ -178,6 +187,7 @@ class InstallerService
             $class = ClassDefinition::getByName($name);
             if ($class) {
                 $class->delete();
+
                 return true;
             }
 
@@ -209,6 +219,7 @@ class InstallerService
      * Creates or updates WebsiteSettings.
      *
      * @param array $params
+     *
      * @return WebsiteSetting
      */
     public function setWebsiteSetting(array $params)

@@ -2,6 +2,7 @@
 /**
  * @category    Pimcore 5 DevKit
  * @date        14/02/2018 11:53
+ *
  * @author      Wojciech Peisert <wpeisert@divante.pl>
  * @copyright   Copyright (c) 2018 Divante Ltd. (https://divante.co)
  */
@@ -14,39 +15,42 @@ use Pimcore\Model\Asset\Image\Thumbnail\Config as ThumbnailConfig;
 
 /**
  * Class ThumbnailDefinitionService
+ *
  * @package PimcoreDevkitBundle\Service
  */
 class ThumbnailConfigService
 {
-/* EXAMPLE CONFIG
-[
-    'name'     => 'articleThumbnail',
-    'settings' =>
-        [
-            'description'    => '',
-            'quality'        => 85,
-            'highResolution' => 0,
-        ],
-    'mediaData' =>
-        [
-            'default' =>
-                [
+    /* EXAMPLE CONFIG
+    [
+        'name'     => 'articleThumbnail',
+        'settings' =>
+            [
+                'description'    => '',
+                'quality'        => 85,
+                'highResolution' => 0,
+            ],
+        'mediaData' =>
+            [
+                'default' =>
                     [
-                        'type'      => 'resize',
-                        'arguments' =>
-                            [
-                                'width'          => 262,
-                                'height'         => 200
-                            ]
+                        [
+                            'type'      => 'resize',
+                            'arguments' =>
+                                [
+                                    'width'          => 262,
+                                    'height'         => 200
+                                ]
+                        ]
                     ]
-                ]
-        ]
-];
-*/
+            ]
+    ];
+    */
+
     /**
      * Create or update (by name) thumbnail config
      *
      * @param array $params
+     *
      * @return ThumbnailConfig
      */
     public function setThumbnailConfigByName(array $config)
@@ -83,6 +87,7 @@ class ThumbnailConfigService
      * Silently delete thumbnail config by name
      *
      * @param string $name
+     *
      * @return ThumbnailConfig
      */
     public function deleteThumbnailConfigByName(string $name)
@@ -98,12 +103,12 @@ class ThumbnailConfigService
      * Assigns setting if exists
      *
      * @param ThumbnailConfig $thumbConfig
-     * @param string $name
-     * @param string $value
+     * @param string          $name
+     * @param string          $value
      */
     private function tryAssignSetting(ThumbnailConfig $thumbConfig, $name, $value): void
     {
-        $setter = 'set' . ucfirst($name);
+        $setter = 'set'.ucfirst($name);
         if (method_exists($thumbConfig, $setter)) {
             $thumbConfig->$setter($value);
         }
@@ -113,7 +118,7 @@ class ThumbnailConfigService
      * Add items to thumbnail config
      *
      * @param ThumbnailConfig $thumbConfig
-     * @param array $item
+     * @param array           $item
      */
     private function addItems(ThumbnailConfig $thumbConfig, string $mediaName, array $items): void
     {
@@ -128,8 +133,8 @@ class ThumbnailConfigService
      * Add item to thumbnail config
      *
      * @param ThumbnailConfig $thumbConfig
-     * @param string $mediaName
-     * @param array $item
+     * @param string          $mediaName
+     * @param array           $item
      */
     private function addItem(ThumbnailConfig $thumbConfig, string $mediaName, array $item): void
     {

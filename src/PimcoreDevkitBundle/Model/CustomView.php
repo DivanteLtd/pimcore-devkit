@@ -2,17 +2,19 @@
 /**
  * @category    Pimcore 5 DevKit
  * @date        08/12/2017
+ *
  * @author      Korneliusz Kirsz <kkirsz@divante.pl>
  * @copyright   Copyright (c) 2017 DIVANTE (http://divante.pl)
  */
 
 namespace PimcoreDevkitBundle\Model;
 
-use Pimcore\Model\AbstractModel;
 use Pimcore\Logger;
+use Pimcore\Model\AbstractModel;
 
 /**
  * Class CustomView
+ *
  * @package PimcoreDevkitBundle\Model
  */
 class CustomView extends AbstractModel
@@ -80,11 +82,12 @@ class CustomView extends AbstractModel
 
     /**
      * @param $id
+     *
      * @return CustomView|null
      */
     public static function getById($id)
     {
-        $cacheKey = 'customview_' . $id;
+        $cacheKey = 'customview_'.$id;
 
         try {
             $customView = \Pimcore\Cache\Runtime::get($cacheKey);

@@ -1,6 +1,7 @@
 <?php
 /**
  * @date        5/12/2017 11:53
+ *
  * @author      Wojciech Peisert <wpeisert@divante.pl>
  * @copyright   Copyright (c) 2017 Divante Ltd. (https://divante.co)
  */
@@ -30,6 +31,7 @@ class UserService
     /**
      * @param array $params
      * @param array $permissions
+     *
      * @return User
      */
     public function createUser(array $params, array $permissions = null)
@@ -51,6 +53,7 @@ class UserService
 
     /**
      * @param string $name
+     *
      * @return null|User
      */
     public function getUser($name)
@@ -60,6 +63,7 @@ class UserService
             if ($user instanceof User) {
                 return $user;
             }
+
             return null;
         } catch (\Exception $e) {
             return null;

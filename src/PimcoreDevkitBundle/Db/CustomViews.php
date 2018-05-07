@@ -2,6 +2,7 @@
 /**
  * @category    Pimcore 5 DevKit
  * @date        08/12/2017
+ *
  * @author      Korneliusz Kirsz <kkirsz@divante.pl>
  * @copyright   Copyright (c) 2017 DIVANTE (http://divante.pl)
  */
@@ -13,12 +14,14 @@ use Pimcore\File;
 
 /**
  * Class CustomViews
+ *
  * @package PimcoreDevkitBundle\Db
  */
 class CustomViews extends PhpArrayFileTable
 {
     /**
      * @param $filePath string
+     *
      * @return CustomViews
      */
     public static function get($filePath)
@@ -30,13 +33,10 @@ class CustomViews extends PhpArrayFileTable
         return self::$tables[$filePath];
     }
 
-    /**
-     *
-     */
     protected function load()
     {
         if (file_exists($this->filePath)) {
-            $data = include($this->filePath);
+            $data = include $this->filePath;
             if (!is_array($data)) {
                 $data = [];
             }
@@ -47,9 +47,6 @@ class CustomViews extends PhpArrayFileTable
         }
     }
 
-    /**
-     *
-     */
     protected function save()
     {
         $contents = to_php_data_file_format(['views' => $this->data]);

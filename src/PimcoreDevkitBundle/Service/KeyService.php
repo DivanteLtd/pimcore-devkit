@@ -1,6 +1,7 @@
 <?php
 /**
  * @date        30/11/2017
+ *
  * @author      Wojciech Peisert <wpeisert@divante.pl>
  * @copyright   Copyright (c) 2017 DIVANTE (http://divante.pl)
  */
@@ -23,23 +24,22 @@ class KeyService
     /**
      * @param Folder $objectFolder
      * @param string $objectName
+     *
      * @return string
      */
     public function getFreeDataObjectKey(Folder $objectFolder, $objectName)
     {
         $initialKey = File::getValidFilename($objectName);
         $folderPath = $objectFolder->getFullPath();
-        $initialPath = $folderPath . '/' . $initialKey;
+        $initialPath = $folderPath.'/'.$initialKey;
         if (!AbstractObject::getByPath($initialPath)) {
-
             return $initialKey;
         }
 
         for ($iter = 2;; ++$iter) {
-            $key = $initialKey . '_' . $iter;
-            $path = $folderPath . '/' . $key;
+            $key = $initialKey.'_'.$iter;
+            $path = $folderPath.'/'.$key;
             if (!AbstractObject::getByPath($path)) {
-
                 return $key;
             }
         }
