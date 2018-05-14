@@ -33,25 +33,6 @@ class AssetService
         $parent = Asset::getById($parentId);
         $key    = Asset\Service::getValidKey($key, 'folder');
         $path = $parent->getRealFullPath() . '/' . $key;
-
-        $folder = Folder::getByPath($path);
-        if (!$folder instanceof Folder) {
-            $folder = Folder::create(
-                $parentId,
-                [
-                    'parentId'         => $parentId,
-                    'creationDate'     => time(),
-                    'userOwner'        => 0,
-                    'userModification' => 0,
-                    'path'             => $key,
-                    'published'        => true,
-                    'type'             => 'folder',
-                    'locked'           => true,
-                    'filename'         => $key,
-                ]
-            );
-        }
-
-        return $folder;
+        return Asset\Service::createFolderByPath($path);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 /**
+ * @category    Pimcore 5 DevKit
  * @date        5/12/2017
  * @author      Wojciech Peisert <wpeisert@divante.pl>
  * @copyright   Copyright (c) 2017 DIVANTE (http://divante.pl)

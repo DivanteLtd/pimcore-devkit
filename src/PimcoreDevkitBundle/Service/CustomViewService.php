@@ -19,6 +19,8 @@ use PimcoreDevkitBundle\Model\CustomView;
 class CustomViewService
 {
     /**
+     * Creates Custom View from json file
+     *
      * @param string $filePath
      * @param array $customData
      * @return CustomView

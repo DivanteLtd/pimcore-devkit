@@ -1,6 +1,6 @@
 <?php
 /**
- * @category    Pimcore Plugin
+ * @category    Pimcore 5 Devkit
  * @date        09/09/2017 12:26
  * @author      Jakub Płaskonka <jplaskonka@divante.pl>
  * @copyright   Copyright (c) 2017 Divante Ltd. (https://divante.co)

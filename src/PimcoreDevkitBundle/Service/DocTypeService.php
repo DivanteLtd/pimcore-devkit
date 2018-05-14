@@ -1,5 +1,6 @@
 <?php
 /**
+ * @category    Pimcore 5 DevKit
  * @date        26/01/2018
  * @author      Wojciech Peisert <wpeisert@divante.pl>
  * @copyright   Copyright (c) 2018 DIVANTE (http://divante.pl)
@@ -21,6 +22,7 @@ use Pimcore\Model\Document\DocType;
 class DocTypeService
 {
     /**
+     * Returns DocType by name
      * @param string $name
      * @return null|DocType
      */

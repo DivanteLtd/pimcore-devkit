@@ -1,5 +1,6 @@
 <?php
 /**
+ * @category    Pimcore 5 DevKit
  * @date        30/11/2017
  * @author      Wojciech Peisert <wpeisert@divante.pl>
  * @copyright   Copyright (c) 2017 DIVANTE (http://divante.pl)
@@ -34,22 +35,16 @@ class DataObjectService
         $key    = DataObject\Service::getValidKey($key, 'object');
         $path   = $parent->getRealFullPath() . '/' . $key;
 
-        $folder = Folder::getByPath($path);
-        if (!$folder instanceof Folder) {
-            $folder = Folder::create([
-                'o_parentId'         => $parentId,
-                'o_creationDate'     => time(),
-                'o_userOwner'        => 0,
-                'o_userModification' => 0,
-                'o_key'              => $key,
-                'o_published'        => true,
-                'o_locked'           => true,
-            ]);
-        }
-
-        return $folder;
+        return DataObject\Service::createFolderByPath($path);
     }
 
+    /**
+     * @param $class
+     * @param $searchData
+     * @param $objectName
+     * @param $objectFolder
+     * @return AbstractObject
+     */
     public function getOrCreateDataObject(
         $class,
         $searchData,
@@ -74,6 +69,12 @@ class DataObjectService
         return $object;
     }
 
+    /**
+     * Finds objects using data in array $searchData. E.g. ["firstName" => "John"]
+     * @param $class
+     * @param $searchData
+     * @return mixed
+     */
     public function findDataObject(
         $class,
         $searchData
@@ -104,7 +105,8 @@ class DataObjectService
      * @param string $objectName
      * @param Folder $objectFolder
      * @param array $data
-     * @return AbstractObject
+     * @return mixed
+     * @throws \Exception
      */
     public function createDataObject(
         string $class,
@@ -124,6 +126,7 @@ class DataObjectService
             'o_userModification' => 0,
             'o_index'            => 0,
         ];
+
         $object = $class::create(array_merge($data, $additionalData));
         $object->save();
 
