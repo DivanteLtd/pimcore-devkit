@@ -34,8 +34,21 @@ class DataObjectService
         $parent = DataObject::getById($parentId);
         $key    = DataObject\Service::getValidKey($key, 'object');
         $path   = $parent->getRealFullPath() . '/' . $key;
+        $folder = Folder::getByPath($path);
 
-        return DataObject\Service::createFolderByPath($path);
+        if (!$folder instanceof Folder) {
+            $folder = Folder::create([
+                'o_parentId'         => $parentId,
+                'o_creationDate'     => time(),
+                'o_userOwner'        => 0,
+                'o_userModification' => 0,
+                'o_key'              => $key,
+                'o_published'        => true,
+                'o_locked'           => true,
+            ]);
+        }
+
+        return $folder;
     }
 
     /**
@@ -126,7 +139,7 @@ class DataObjectService
             'o_userModification' => 0,
             'o_index'            => 0,
         ];
-
+        
         $object = $class::create(array_merge($data, $additionalData));
         $object->save();
 
