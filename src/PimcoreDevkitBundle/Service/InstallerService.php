@@ -151,6 +151,18 @@ class InstallerService
      */
     public function createClassDefinition(string $name, string $jsonFilePath)
     {
+        $json = file_get_contents($jsonFilePath);
+
+        return $this->createClassDefinitionFromString($name, $json);
+    }
+
+    /**
+     * @param string $name
+     * @param string $jsonFilePath
+     * @return bool
+     */
+    public function createClassDefinitionFromString(string $name, string $json)
+    {
         $class = null;
         try {
             $class = ClassDefinition::getByName($name);
@@ -161,7 +173,6 @@ class InstallerService
             $class = ClassDefinition::create(['name' => $name, 'userOwner' => 0]);
         }
 
-        $json = file_get_contents($jsonFilePath);
         $success = ClassDefinition\Service::importClassDefinitionFromJson($class, $json);
 
         return $success;
