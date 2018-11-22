@@ -224,7 +224,8 @@ class InstallerService
      */
     public function setWebsiteSetting(array $params)
     {
-        $setting = WebsiteSetting::getByName($params['name']);
+        $siteId  = array_key_exists('siteId', $params) ? $params['siteId'] : null;
+        $setting = WebsiteSetting::getByName($params['name'], $siteId);
 
         if (!$setting instanceof WebsiteSetting) {
             $setting = new WebsiteSetting();

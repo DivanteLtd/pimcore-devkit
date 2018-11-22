@@ -15,3 +15,4 @@ services:
     PimcoreDevkitBundle\Service\DocTypeService: ~
     PimcoreDevkitBundle\Service\AssetService: ~
     PimcoreDevkitBundle\Service\ThumbnailDefinitionService: ~
+    PimcoreDevkitBundle\Service\MigrationService: ~

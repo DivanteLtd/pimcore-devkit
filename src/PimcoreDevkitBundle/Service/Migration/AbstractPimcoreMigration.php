@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace PimcoreDevkitBundle\Service;
+namespace PimcoreDevkitBundle\Service\Migration;
 
 use PimcoreDevkitBundle\Service\MigrationService;
 use Pimcore\Migrations\Migration\AbstractPimcoreMigration as BaseMigration;
