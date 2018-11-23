@@ -1,8 +1,4 @@
 services:
-#    divante_pimcore_devkit.example:
-#        class: Divante\PimcoreDevkitBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
-
     PimcoreDevkitBundle\Service\InstallerService: ~
     PimcoreDevkitBundle\Service\WorkflowService: ~
     PimcoreDevkitBundle\Service\ClassDefinitionService: ~
@@ -15,3 +11,4 @@ services:
     PimcoreDevkitBundle\Service\DocTypeService: ~
     PimcoreDevkitBundle\Service\AssetService: ~
     PimcoreDevkitBundle\Service\ThumbnailDefinitionService: ~
+    PimcoreDevkitBundle\Service\MigrationService: ~

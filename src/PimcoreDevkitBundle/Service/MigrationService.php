@@ -19,7 +19,8 @@ use Pimcore\Model\Translation\Website as WebsiteTranslation;
 
 /**
  * Class MigrationService
- * @package BookdataBundle\Service
+ *
+ * @package PimcoreDevkitBundle\Service
  */
 class MigrationService
 {
