@@ -9,11 +9,13 @@ declare(strict_types=1);
 
 namespace PimcoreDevkitBundle\Service;
 
+use Pimcore\Model\DataObject\ClassDefinition\Data\Email;
 use Pimcore\Model\Document\Folder;
 use Pimcore\Model\Document;
 use Pimcore\Model\Document\Page;
 use Pimcore\Model\Document\DocType;
 use Pimcore\Model\Document\Snippet;
+use PimcoreDevkitBundle\Service\Configuration\DocumentConfiguration;
 
 /**
  * Class DocumentService
@@ -130,5 +132,45 @@ class DocumentService
         $doc->save();
 
         return $doc;
+    }
+
+    /**
+     * @param string $path
+     * @param int|null $parentId
+     * @param string|null $key
+     *
+     * @param DocumentConfiguration|null $configuration
+     *
+     * @return Document
+     */
+    public function createOrGetDocumentForGivenPath(
+        string $path,
+        int $parentId = null,
+        string $key = null,
+        DocumentConfiguration $configuration = null
+    ): Document {
+        $document = Document::getByPath($path);
+        if (null === $document) {
+            $documentClass = $configuration->getDocumentFqcn();
+            if (class_exists($documentClass)) {
+                $document = new $documentClass;
+                $document->setController($configuration->getController());
+                $document->setAction($configuration->getAction());
+                $document->setParentId($parentId);
+                $document->setTemplate($configuration->getTemplate());
+                $document->setModule($configuration->getModule());
+                $document->setKey($key);
+
+                $document->setPublished(true);
+                $document->setCreationDate(time());
+                $document->setModificationDate(time());
+                $document->setUserOwner(0);
+                $document->setUserModification(0);
+
+                $document->save();
+            }
+        }
+
+        return $document;
     }
 }
