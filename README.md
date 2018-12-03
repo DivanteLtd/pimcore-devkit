@@ -21,7 +21,7 @@ This module is compatible with Pimcore 5.3.0 and higher.
 
 ## Installing/Getting started
 
-composer require divanteltd/pimcore-devkit
+composer require divanteltd/pimcoredevkit
 
 ## Developing
 
