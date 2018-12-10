@@ -200,6 +200,11 @@ class InstallerService
         return false;
     }
 
+    /**
+     * @param string $key
+     * @param string $jsonFilePath
+     * @return bool
+     */
     public function createObjectBrickDefinition(string $key, string $jsonFilePath)
     {
         try {
@@ -212,6 +217,27 @@ class InstallerService
         $json = file_get_contents($jsonFilePath);
 
         $success = ClassDefinition\Service::importObjectBrickFromJson($brick, $json, true);
+
+        return $success;
+    }
+
+    /**
+     * @param string $key
+     * @param string $jsonFilePath
+     * @return bool
+     */
+    public function createFieldcollectionDefinition(string $key, string $jsonFilePath): bool
+    {
+        try {
+            $fieldcollection = FieldcollectionDefinition::getByKey($key);
+        } catch (\Exception $e) {
+            $fieldcollection = new FieldcollectionDefinition();
+            $fieldcollection->setKey($key);
+        }
+
+        $json = file_get_contents($jsonFilePath);
+
+        $success = ClassDefinition\Service::importFieldCollectionFromJson($fieldcollection, $json, true);
 
         return $success;
     }
