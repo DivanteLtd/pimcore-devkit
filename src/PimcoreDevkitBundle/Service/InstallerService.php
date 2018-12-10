@@ -11,6 +11,7 @@ namespace PimcoreDevkitBundle\Service;
 
 use Pimcore\Model\DataObject\ClassDefinition;
 use Pimcore\Model\DataObject\Objectbrick\Definition as ObjectbrickDefinition;
+use Pimcore\Model\DataObject\Fieldcollection\Definition as FieldcollectionDefinition;
 use Pimcore\Model\DataObject\Folder as DataObject_Folder;
 use Pimcore\Model\Document\Folder as Document_Folder;
 use Pimcore\Model\Asset\Folder as Asset_Folder;
