@@ -13,7 +13,7 @@ namespace PimcoreDevkitBundle\Service;
 use Pimcore\Model\Asset\Image\Thumbnail\Config as ThumbnailConfig;
 
 /**
- * Class ThumbnailDefinitionService
+ * Class ThumbnailConfigService
  * @package PimcoreDevkitBundle\Service
  */
 class ThumbnailConfigService
