@@ -100,6 +100,8 @@ class AssetService
             $asset = new Asset();
             $asset->setFilename($filename);
             $asset->setParent($targetFolder);
+            $asset->addMetadata("origin", "text", "url");
+            $asset->addMetadata("origin_url", "text", $url);
             $asset->setData($res->getBody());
             $asset->save();
         }
