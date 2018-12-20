@@ -9,7 +9,7 @@
 namespace PimcoreDevkitBundle\Command;
 
 use Pimcore\Console\AbstractCommand;
-use Pimcore\Model\Object\Folder;
+use Pimcore\Model\DataObject\Folder;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
