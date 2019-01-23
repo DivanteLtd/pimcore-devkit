@@ -85,7 +85,7 @@ class AssetService
         }
         $type = $res->getHeader('content-type')[0];
 
-        $fileType = array_search($type, Tool\Mime::$extensionMapping);
+        $fileType = array_search($type, \Pimcore::getContainer()->getParameter('pimcore.mime.extensions'));
         if (false === $fileType) {
             $fileType = 'txt';
         }
