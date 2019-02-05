@@ -71,3 +71,4 @@ class CustomLayoutsService
         return CustomLayout::getIdentifier($classId);
     }
 }
+
