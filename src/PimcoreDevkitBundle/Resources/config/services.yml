@@ -13,3 +13,5 @@ services:
     PimcoreDevkitBundle\Service\ThumbnailConfigService: ~
     PimcoreDevkitBundle\Service\MigrationService: ~
     PimcoreDevkitBundle\Service\DocumentService: ~
+    PimcoreDebkitBundle\Service\CustomLayoutService:
+       arguments: ['@serializer']
