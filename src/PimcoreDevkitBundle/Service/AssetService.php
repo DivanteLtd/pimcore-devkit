@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace PimcoreDevkitBundle\Service;
 
 use GuzzleHttp\ClientInterface;
-use MongoDB\GridFS\Exception\FileNotFoundException;
+use PimcoreDevkitBundle\PimcoreDevkitBundle\Wrapper\HttpAsset;
+use PimcoreDevkitBundle\PimcoreDevkitBundle\Wrapper\HttpAssetInterface;
+use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Pimcore\Http\ClientFactory;
 use Pimcore\Model\Asset\Folder;
 use Pimcore\Model\Asset;
@@ -24,6 +26,7 @@ use Pimcore\Tool;
  */
 class AssetService
 {
+    private const DEFAULT_FILE_TYPE = 'txt';
 
     /** @var ClientInterface */
     protected $httpClient;
@@ -66,47 +69,52 @@ class AssetService
 
     /**
      * @param string $url
-     * @param Folder $targetFolder
-     * @param null $filename
-     * @return Asset
-     * @throws \Exception
+     * @return HttpAsset
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getHttpAsset(string $url, Folder $targetFolder, $filename = null): Asset
+    protected function getHttpClient(): ClientInterface
     {
         if (!$this->httpClient) {
             $this->httpClient = \Pimcore::getContainer()->get('pimcore.http_client');
         }
+        return $this->httpClient;
+    }
 
-        $res = $this->httpClient->request('GET', $url, ['timeout' => 5]);
-        $statusCode = $res->getStatusCode();
+    /**
+     * @param string $url
+     * @param Folder $targetFolder
+     * @param null $filename
+     * @param string $defaultFileType
+     * @return HttpAssetInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function prepareHttpAsset(
+        string $url,
+        Folder $targetFolder,
+        $filename = null,
+        string $defaultFileType = self::DEFAULT_FILE_TYPE
+    ): HttpAssetInterface {
+        return new HttpAsset($this->getHttpClient(), $url, $targetFolder, $filename, $defaultFileType);
+    }
 
-        if ($statusCode != 200) {
-            throw new FileNotFoundException();
-        }
-        $type = $res->getHeader('content-type')[0];
+    /**
+     * @param string $url
+     * @param Folder $targetFolder
+     * @param null $filename
+     * @param string $defaultFileType
+     * @return Asset
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Exception
+     */
+    public function getHttpAsset(
+        string $url,
+        Folder $targetFolder,
+        $filename = null,
+        string $defaultFileType = self::DEFAULT_FILE_TYPE
+    ): Asset {
+        $httpAsset = $this->prepareHttpAsset($url, $targetFolder, $filename, $defaultFileType);
 
-        $fileType = array_search($type, \Pimcore::getContainer()->getParameter('pimcore.mime.extensions'));
-        if (false === $fileType) {
-            $fileType = 'txt';
-        }
-
-        if (!$filename) {
-            $filename = md5((string) $res->getBody()) . "." . $fileType;
-        }
-
-        $asset = Asset::getByPath($targetFolder->getFullPath() . "/" . $filename);
-
-        if (!$asset) {
-            $asset = new Asset();
-            $asset->setFilename($filename);
-            $asset->setParent($targetFolder);
-            $asset->addMetadata("origin", "text", "url");
-            $asset->addMetadata("origin_url", "text", $url);
-            $asset->setData($res->getBody());
-            $asset->save();
-        }
-
-        return $asset;
+        return $httpAsset->getAsset();
     }
 
     /**
@@ -119,7 +127,7 @@ class AssetService
         $asset = Asset::getByPath($targetFolder . "/" . $key);
 
         if (!$asset) {
-            throw new \Symfony\Component\Filesystem\Exception\FileNotFoundException(
+            throw new FileNotFoundException(
                 "Asset with path ". $targetFolder ."/". $key ." was not found"
             );
         }
