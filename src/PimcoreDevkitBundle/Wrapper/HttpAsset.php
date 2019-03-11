@@ -66,8 +66,8 @@ class HttpAsset implements HttpAssetInterface
         string $filename = null,
         string $defaultFileType = 'txt'
     ) {
-        $response = $httpClient->request('GET', $url, ['timeout' => 5]);
-        $statusCode = $response->getStatusCode();
+        $this->response = $httpClient->request('GET', $url, ['timeout' => 5]);
+        $statusCode = $this->response->getStatusCode();
 
         if ($statusCode != 200) {
             throw new FileNotFoundException("Error $statusCode while downloading url: $url");
@@ -76,7 +76,6 @@ class HttpAsset implements HttpAssetInterface
         $this->setAssetFilename($filename);
         $this->targetFolder = $targetFolder;
         $this->defaultFileType = $defaultFileType;
-        $this->response = $response;
     }
 
     /**
