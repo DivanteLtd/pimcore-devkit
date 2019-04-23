@@ -6,9 +6,9 @@ Pimcore DevKit is a set of tools that helps developing Pimcore applications. It 
 - [Pimcore DevKit](#pimcore-devkit)
 	- [Compatibility](#compatibility)
 	- [Installing/Getting started](#installinggetting-started)
-	- [Developing](#developing)
 	- [Features](#features)
-		- [Classification store](#classification-store)
+		- [Commands](#commands)
+	- [Developing](#developing)
 	- [Configuration](#configuration)
 	- [Contributing](#contributing)
 	- [Licensing](#licensing)
@@ -23,13 +23,18 @@ This module is compatible with Pimcore 5.3.0 and higher.
 
 composer require divanteltd/pimcoredevkit
 
-## Developing
-
-... to be done ..
-
 ## Features
 
-### Classification store
+### Commands
+
+####  devkit:asset:synchronize
+Synchronizes assets tree with filesystem changes
+#### devkit:delete_by_id
+Deletes object, document, asset from given tree
+#### devkit:deletefolder
+Deletes folder from given tree
+
+## Developing
 
 ... to be done ..
 
