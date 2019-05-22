@@ -26,7 +26,7 @@ class RemoveAllObjectsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('divante:objects:remove_all')
+            ->setName('devkit:object:remove_all')
             ->addOption(
                 'classes',
                 'c',
