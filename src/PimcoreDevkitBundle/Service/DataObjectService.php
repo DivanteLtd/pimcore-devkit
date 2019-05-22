@@ -20,6 +20,8 @@ use Pimcore\Model\DataObject\Folder;
  */
 class DataObjectService
 {
+    const DELETE_BATCH_SIZE = 1000;
+
     /**
      * Returns Object folder. If not existent, creates it.
      *
@@ -128,5 +130,46 @@ class DataObjectService
         $object->save();
 
         return $object;
+    }
+
+    /**
+     * @param string $class
+     * @return int
+     * @throws \Exception
+     */
+    public function removeAllObjects(string $class): int
+    {
+        if (!class_exists($class)) {
+            throw new \Exception("There is no class $class");
+        }
+
+        $removedCount = 0;
+
+        $skipIds = [];
+
+        while (true) {
+            $listingClass = $class . "\\Listing";
+            $listing = new $listingClass();
+            $listing->setUnpublished(true);
+            $listing->setLimit(self::DELETE_BATCH_SIZE);
+            if (count($skipIds) > 0) {
+                $listing->setCondition(" o_id NOT IN ('" . implode("','", $skipIds) . "')");
+            }
+            $listing->load();
+            if (0 === $listing->getCount()) {
+                break;
+            }
+
+            foreach ($listing->getObjects() as $object) {
+                try {
+                    $object->delete();
+                    $removedCount++;
+                } catch (\Exception $e) {
+                    $skipIds[] = $object->getId();
+                }
+            }
+        }
+
+        return $removedCount;
     }
 }
