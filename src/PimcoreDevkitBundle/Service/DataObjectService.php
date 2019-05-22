@@ -134,10 +134,10 @@ class DataObjectService
 
     /**
      * @param string $class
-     * @return int
+     * @return \Generator|string
      * @throws \Exception
      */
-    public function removeAllObjects(string $class): int
+    public function removeAllObjects(string $class)
     {
         if (!class_exists($class)) {
             throw new \Exception("There is no class $class");
@@ -161,15 +161,19 @@ class DataObjectService
             }
 
             foreach ($listing->getObjects() as $object) {
+                $message = $object->getFullPath();
                 try {
                     $object->delete();
                     $removedCount++;
+                    $message .= " - deleted";
                 } catch (\Exception $e) {
                     $skipIds[] = $object->getId();
+                    $message .= " - delete ERROR (skipped)";
                 }
+                yield $message;
             }
         }
 
-        return $removedCount;
+        return strval($removedCount);
     }
 }

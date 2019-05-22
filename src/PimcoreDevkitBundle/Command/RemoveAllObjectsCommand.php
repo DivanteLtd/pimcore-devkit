@@ -56,8 +56,13 @@ class RemoveAllObjectsCommand extends ContainerAwareCommand
             $output->write("Removing all objects of class: $fullClassName ... ");
             /** @var DataObjectService $service */
             $service = $this->getContainer()->get(DataObjectService::class);
-            $cnt = $service->removeAllObjects($fullClassName);
-            $output->writeln(" $cnt removed");
+            $cnt = 0;
+            foreach ($service->removeAllObjects($fullClassName) as $message) {
+                ++$cnt;
+                $output->writeln($message);
+            }
+
+            $output->writeln("TOTAL REMOVED:  $cnt");
         }
     }
 }
