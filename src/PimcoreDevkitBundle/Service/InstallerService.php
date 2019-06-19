@@ -211,9 +211,12 @@ class InstallerService
         try {
             $brick = ObjectbrickDefinition::getByKey($key);
         } catch (\Exception $e) {
+        }
+        if (!$brick) {
             $brick = new ObjectbrickDefinition();
             $brick->setKey($key);
         }
+        
 
         $json = file_get_contents($jsonFilePath);
 
