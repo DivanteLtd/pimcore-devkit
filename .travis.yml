@@ -3,6 +3,8 @@ language: php
 cache:
     directories:
         - $HOME/.cache/composer
+services:
+    - mysql
 
 addons:
     mariadb: '10.1'
