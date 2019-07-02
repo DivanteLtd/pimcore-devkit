@@ -24,7 +24,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class DeleteByIdCommand extends AbstractCommand
 {
     /**
-     * {@inheritdoc}
+     * @return void
      */
     protected function configure() : void
     {
@@ -41,7 +41,9 @@ class DeleteByIdCommand extends AbstractCommand
     }
 
     /**
-     * {@inheritdoc}
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return void
      */
     protected function execute(InputInterface $input, OutputInterface $output) : void
     {
@@ -82,6 +84,7 @@ class DeleteByIdCommand extends AbstractCommand
 
     /**
      * @param int $id
+     * @return void
      * @throws \Exception
      */
     protected function deleteObject(int $id)
@@ -96,6 +99,7 @@ class DeleteByIdCommand extends AbstractCommand
 
     /**
      * @param int $id
+     * @return void
      * @throws \Exception
      */
     protected function deleteDocument(int $id)
@@ -110,6 +114,7 @@ class DeleteByIdCommand extends AbstractCommand
 
     /**
      * @param int $id
+     * @return void
      * @throws \Exception
      */
     protected function deleteAsset(int $id)

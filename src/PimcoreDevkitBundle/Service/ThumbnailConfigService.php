@@ -46,8 +46,8 @@ class ThumbnailConfigService
     /**
      * Create or update (by name) thumbnail config
      *
-     * @param array $params
-     * @return ThumbnailConfig
+     * @param array $config
+     * @return ThumbnailConfig|null
      */
     public function setThumbnailConfigByName(array $config)
     {
@@ -84,6 +84,7 @@ class ThumbnailConfigService
      *
      * @param string $name
      * @return ThumbnailConfig
+     * @return void
      */
     public function deleteThumbnailConfigByName(string $name)
     {
@@ -100,6 +101,7 @@ class ThumbnailConfigService
      * @param ThumbnailConfig $thumbConfig
      * @param string $name
      * @param string $value
+     * @return void
      */
     private function tryAssignSetting(ThumbnailConfig $thumbConfig, $name, $value): void
     {
@@ -113,7 +115,9 @@ class ThumbnailConfigService
      * Add items to thumbnail config
      *
      * @param ThumbnailConfig $thumbConfig
-     * @param array $item
+     * @param string $mediaName
+     * @param array $items
+     * @return void
      */
     private function addItems(ThumbnailConfig $thumbConfig, string $mediaName, array $items): void
     {
@@ -130,6 +134,7 @@ class ThumbnailConfigService
      * @param ThumbnailConfig $thumbConfig
      * @param string $mediaName
      * @param array $item
+     * @return void
      */
     private function addItem(ThumbnailConfig $thumbConfig, string $mediaName, array $item): void
     {

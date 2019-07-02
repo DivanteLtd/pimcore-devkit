@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Serializer;
  * Class CustomLayoutsService
  * @package PimcoreDevkitBundle\Service
  */
-class CustomLayoutsService
+class CustomLayoutService
 {
     /**
      * @var Serializer
@@ -35,6 +35,7 @@ class CustomLayoutsService
      * @param string $name
      * @param int    $classId
      * @param string $filePath
+     * @return void
      * @throws \Exception
      */
     public function importLayout(string $name, int $classId, string $filePath)
@@ -63,7 +64,7 @@ class CustomLayoutsService
     }
 
     /**
-     * @param $classId
+     * @param string $classId
      * @return int|null
      */
     public function suggestId($classId)
@@ -71,4 +72,3 @@ class CustomLayoutsService
         return CustomLayout::getIdentifier($classId);
     }
 }
-

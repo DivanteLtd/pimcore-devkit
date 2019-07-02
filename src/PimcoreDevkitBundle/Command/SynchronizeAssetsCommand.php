@@ -22,7 +22,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class SynchronizeAssetsCommand extends AbstractCommand
 {
     /**
-     * {@inheritdoc}
+     * @return void
      */
     protected function configure() : void
     {
@@ -38,7 +38,10 @@ class SynchronizeAssetsCommand extends AbstractCommand
     }
 
     /**
-     * {@inheritdoc}
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return void
+     * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output) : void
     {
@@ -84,7 +87,7 @@ class SynchronizeAssetsCommand extends AbstractCommand
     }
 
     /**
-     * @param $dir
+     * @param string $dir
      * @return array
      */
     function listFolderFiles($dir)

@@ -159,7 +159,7 @@ class InstallerService
 
     /**
      * @param string $name
-     * @param string $jsonFilePath
+     * @param string $json
      * @return bool
      */
     public function createClassDefinitionFromString(string $name, string $json)

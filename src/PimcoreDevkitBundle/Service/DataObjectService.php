@@ -52,6 +52,13 @@ class DataObjectService
         return $folder;
     }
 
+    /**
+     * @param string $class
+     * @param array $searchData
+     * @param string $objectName
+     * @param string $objectFolder
+     * @return DataObject|AbstractObject
+     */
     public function getOrCreateDataObject(
         $class,
         $searchData,
@@ -76,6 +83,11 @@ class DataObjectService
         return $object;
     }
 
+    /**
+     * @param string $class
+     * @param array $searchData
+     * @return DataObject
+     */
     public function findDataObject(
         $class,
         $searchData

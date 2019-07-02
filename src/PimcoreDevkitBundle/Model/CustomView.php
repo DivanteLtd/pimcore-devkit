@@ -79,7 +79,7 @@ class CustomView extends AbstractModel
     public $treeContextMenu;
 
     /**
-     * @param $id
+     * @param int $id
      * @return CustomView|null
      */
     public static function getById($id)
@@ -117,6 +117,7 @@ class CustomView extends AbstractModel
 
     /**
      * @param int $id
+     * @return void
      */
     public function setId($id)
     {
@@ -133,6 +134,7 @@ class CustomView extends AbstractModel
 
     /**
      * @param string $treetype
+     * @return void
      */
     public function setTreetype($treetype)
     {
@@ -149,6 +151,7 @@ class CustomView extends AbstractModel
 
     /**
      * @param string $name
+     * @return void
      */
     public function setName($name)
     {
@@ -165,6 +168,7 @@ class CustomView extends AbstractModel
 
     /**
      * @param string $condition
+     * @return void
      */
     public function setCondition($condition)
     {
@@ -181,6 +185,7 @@ class CustomView extends AbstractModel
 
     /**
      * @param string $icon
+     * @return void
      */
     public function setIcon($icon)
     {
@@ -197,6 +202,7 @@ class CustomView extends AbstractModel
 
     /**
      * @param string $rootfolder
+     * @return void
      */
     public function setRootfolder($rootfolder)
     {
@@ -213,6 +219,7 @@ class CustomView extends AbstractModel
 
     /**
      * @param bool $showroot
+     * @return void
      */
     public function setShowroot($showroot)
     {
@@ -229,6 +236,7 @@ class CustomView extends AbstractModel
 
     /**
      * @param string $classes
+     * @return void
      */
     public function setClasses($classes)
     {
@@ -245,6 +253,7 @@ class CustomView extends AbstractModel
 
     /**
      * @param string $position
+     * @return void
      */
     public function setPosition($position)
     {
@@ -261,6 +270,7 @@ class CustomView extends AbstractModel
 
     /**
      * @param string $sort
+     * @return void
      */
     public function setSort($sort)
     {
@@ -277,6 +287,7 @@ class CustomView extends AbstractModel
 
     /**
      * @param bool $expanded
+     * @return void
      */
     public function setExpanded($expanded)
     {
@@ -293,6 +304,7 @@ class CustomView extends AbstractModel
 
     /**
      * @param string $having
+     * @return void
      */
     public function setHaving($having)
     {
@@ -309,6 +321,7 @@ class CustomView extends AbstractModel
 
     /**
      * @param array $joins
+     * @return void
      */
     public function setJoins($joins)
     {
@@ -325,6 +338,7 @@ class CustomView extends AbstractModel
 
     /**
      * @param string $where
+     * @return void
      */
     public function setWhere($where)
     {

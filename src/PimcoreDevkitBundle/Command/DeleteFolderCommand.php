@@ -22,7 +22,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class DeleteFolderCommand extends AbstractCommand
 {
     /**
-     * {@inheritdoc}
+     * @return void
      */
     protected function configure() : void
     {
@@ -39,7 +39,9 @@ class DeleteFolderCommand extends AbstractCommand
     }
 
     /**
-     * {@inheritdoc}
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return void
      */
     protected function execute(InputInterface $input, OutputInterface $output) : void
     {
@@ -80,6 +82,7 @@ class DeleteFolderCommand extends AbstractCommand
 
     /**
      * @param string $path
+     * @return void
      * @throws \Exception
      */
     protected function deleteObject(string $path)
@@ -94,6 +97,7 @@ class DeleteFolderCommand extends AbstractCommand
 
     /**
      * @param string $path
+     * @return void
      * @throws \Exception
      */
     protected function deleteDocument(string $path)
@@ -108,6 +112,7 @@ class DeleteFolderCommand extends AbstractCommand
 
     /**
      * @param string $path
+     * @return void
      * @throws \Exception
      */
     protected function deleteAssetFolder(string $path)
@@ -119,5 +124,4 @@ class DeleteFolderCommand extends AbstractCommand
             $folder->delete();
         }
     }
-
 }

@@ -131,7 +131,8 @@ class HttpAsset implements HttpAssetInterface
     }
 
     /**
-     * @param string|null $filename
+     * @param string $filename
+     * @return void
      */
     protected function setAssetFilename(?string $filename)
     {
@@ -144,7 +145,7 @@ class HttpAsset implements HttpAssetInterface
     }
 
     /**
-     *
+     * @return void
      */
     protected function generateAssetFilename(): void
     {

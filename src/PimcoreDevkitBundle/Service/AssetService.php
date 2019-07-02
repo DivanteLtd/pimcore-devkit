@@ -68,9 +68,7 @@ class AssetService
     }
 
     /**
-     * @param string $url
-     * @return HttpAsset
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return ClientInterface
      */
     protected function getHttpClient(): ClientInterface
     {

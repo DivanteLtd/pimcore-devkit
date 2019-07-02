@@ -37,9 +37,8 @@ class ClassDefinitionService
     }
 
     /**
-     * @param ClassDefinition\Layout $definition
+     * @param ClassDefinition\Layout $layout
      * @param callable $callback
-     * Will run $callback on every Data
      */
     public function traverseLayout(ClassDefinition\Layout &$layout, Callable $callback) {
         $callback($layout);
@@ -54,7 +53,7 @@ class ClassDefinitionService
     /**
      * @param array $definition
      * @param string $name
-     * @param $newValue
+     * @param string $newValue
      * @return array Definition
      */
     public function replaceDefinition(array $definition, string $name, $newValue) : array
