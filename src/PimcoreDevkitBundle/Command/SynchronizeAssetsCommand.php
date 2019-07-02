@@ -22,12 +22,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 class SynchronizeAssetsCommand extends AbstractCommand
 {
     /**
-     * {@inheritdoc}
+     * @return void
      */
-    protected function configure() : void
+    protected function configure(): void
     {
-        $helpMessage =  "This command allows you to synchronize assets tree with filesystem changes.".PHP_EOL;
-        $helpMessage .= "Example usage:".PHP_EOL;
+        $helpMessage = "This command allows you to synchronize assets tree with filesystem changes." . PHP_EOL;
+        $helpMessage .= "Example usage:" . PHP_EOL;
         $helpMessage .= "bin/console devkit:asset:synchronize";
 
         $this
@@ -38,9 +38,12 @@ class SynchronizeAssetsCommand extends AbstractCommand
     }
 
     /**
-     * {@inheritdoc}
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return void
+     * @throws \Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output) : void
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $folder = $input->getArgument("folder");
 
@@ -49,7 +52,7 @@ class SynchronizeAssetsCommand extends AbstractCommand
         } else {
             $folder = $folder[0];
         }
-        $files = $this->listFolderFiles(PIMCORE_ASSET_DIRECTORY.$folder);
+        $files = $this->listFolderFiles(PIMCORE_ASSET_DIRECTORY . $folder);
 
         foreach ($files as $file) {
             // Is it a directory?
@@ -57,11 +60,11 @@ class SynchronizeAssetsCommand extends AbstractCommand
                 continue;
             }
 
-            $parentPath = substr( dirname($file), strlen(PIMCORE_ASSET_DIRECTORY)). "/";
+            $parentPath = substr(dirname($file), strlen(PIMCORE_ASSET_DIRECTORY)) . "/";
             $filename = basename($file);
 
             // Does asset exist?
-            $asset = Asset::getByPath($parentPath.$filename);
+            $asset = Asset::getByPath($parentPath . $filename);
             if ($asset) {
                 continue;
             }
@@ -72,9 +75,9 @@ class SynchronizeAssetsCommand extends AbstractCommand
             $asset->setData(file_get_contents($file));
             try {
                 $asset->save();
-                $output->writeln("Saved ".$parentPath.$filename." as ".$asset->getType());
+                $output->writeln("Saved " . $parentPath . $filename . " as " . $asset->getType());
             } catch (\Throwable $exception) {
-                $output->writeln("Couldn't save ".$parentPath.$filename);
+                $output->writeln("Couldn't save " . $parentPath . $filename);
                 if ($output->isVerbose()) {
                     $output->writeln($exception->getMessage());
                     $output->writeln($exception->getTraceAsString());
@@ -84,10 +87,10 @@ class SynchronizeAssetsCommand extends AbstractCommand
     }
 
     /**
-     * @param $dir
+     * @param string $dir
      * @return array
      */
-    function listFolderFiles($dir)
+    public function listFolderFiles($dir)
     {
         $ffs = rscandir($dir);
 

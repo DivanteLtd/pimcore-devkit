@@ -18,6 +18,8 @@ class UserService
 {
     /**
      * @param string $username
+     * @throws \Exception
+     * @return void
      */
     public function deleteUser($username)
     {
@@ -29,8 +31,10 @@ class UserService
 
     /**
      * @param array $params
-     * @param array $permissions
-     * @return User
+     * @param array|null $permissions
+     * @return User|User\AbstractUser|null
+     * @throws \Exception
+     * @return void
      */
     public function createUser(array $params, array $permissions = null)
     {
@@ -51,7 +55,8 @@ class UserService
 
     /**
      * @param string $name
-     * @return null|User
+     * @return User\AbstractUser|null
+     * @return void
      */
     public function getUser($name)
     {

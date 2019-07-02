@@ -24,12 +24,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 class DeleteByIdCommand extends AbstractCommand
 {
     /**
-     * {@inheritdoc}
+     * @return void
      */
-    protected function configure() : void
+    protected function configure(): void
     {
-        $helpMessage =  "This command allows you to delete object, document, asset in tree without hassle of blocking admin UI.".PHP_EOL;
-        $helpMessage .= "Example usage:".PHP_EOL;
+        $helpMessage = "This command allows you to delete object, document, asset in tree without hassle " .
+            "of blocking admin UI." . PHP_EOL;
+        $helpMessage .= "Example usage:" . PHP_EOL;
         $helpMessage .= "bin/console devkit:delete_by_id -t object -id 1234";
 
         $this
@@ -41,18 +42,20 @@ class DeleteByIdCommand extends AbstractCommand
     }
 
     /**
-     * {@inheritdoc}
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return void
      */
-    protected function execute(InputInterface $input, OutputInterface $output) : void
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $type = $input->getOption("type");
-        if(!$type) {
+        if (!$type) {
             $output->writeln("Missing -t option.");
             return;
         }
 
         $id = $input->getOption("id");
-        if(!$id) {
+        if (!$id) {
             $output->writeln("Missing -id option.");
             return;
         }
@@ -73,22 +76,22 @@ class DeleteByIdCommand extends AbstractCommand
                     return;
             }
 
-            $output->writeln("Element ".$id." has been deleted.");
+            $output->writeln("Element " . $id . " has been deleted.");
         } catch (\Exception $e) {
             $output->writeln($e->getMessage());
         }
-
     }
 
     /**
      * @param int $id
+     * @return void
      * @throws \Exception
      */
     protected function deleteObject(int $id)
     {
         $element = AbstractObject::getById($id);
-        if(!$element) {
-            throw new \Exception("Object with ID ".$id." does not exist.");
+        if (!$element) {
+            throw new \Exception("Object with ID " . $id . " does not exist.");
         } else {
             $element->delete();
         }
@@ -96,13 +99,14 @@ class DeleteByIdCommand extends AbstractCommand
 
     /**
      * @param int $id
+     * @return void
      * @throws \Exception
      */
     protected function deleteDocument(int $id)
     {
         $element = Document::getById($id);
-        if(!$element) {
-            throw new \Exception("Document with ID ".$id." does not exist.");
+        if (!$element) {
+            throw new \Exception("Document with ID " . $id . " does not exist.");
         } else {
             $element->delete();
         }
@@ -110,13 +114,14 @@ class DeleteByIdCommand extends AbstractCommand
 
     /**
      * @param int $id
+     * @return void
      * @throws \Exception
      */
     protected function deleteAsset(int $id)
     {
         $element = Asset::getById($id);
-        if(!$element) {
-            throw new \Exception("Asset with ID ".$id." does not exist.");
+        if (!$element) {
+            throw new \Exception("Asset with ID " . $id . " does not exist.");
         } else {
             $element->delete();
         }

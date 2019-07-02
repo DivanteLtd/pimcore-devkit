@@ -22,9 +22,9 @@ class DocTypeService
 {
     /**
      * @param string $name
-     * @return null|DocType
+     * @return null|DocType|array
      */
-    public function getDocTypeByName($name) : ?DocType
+    public function getDocTypeByName($name)
     {
         $list = new DocType\Listing();
         $list->setFilter(function ($row) use ($name) {

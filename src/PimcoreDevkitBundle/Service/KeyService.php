@@ -30,18 +30,19 @@ class KeyService
         $initialKey = File::getValidFilename($objectName);
         $folderPath = $objectFolder->getFullPath();
         $initialPath = $folderPath . '/' . $initialKey;
-        if (!AbstractObject::getByPath($initialPath)) {
 
+        if (!AbstractObject::getByPath($initialPath)) {
             return $initialKey;
         }
 
-        for ($iter = 2;; ++$iter) {
+        for ($iter = 2; $iter <= 999; ++$iter) {
             $key = $initialKey . '_' . $iter;
             $path = $folderPath . '/' . $key;
             if (!AbstractObject::getByPath($path)) {
-
                 return $key;
             }
         }
+
+        return $initialKey;
     }
 }

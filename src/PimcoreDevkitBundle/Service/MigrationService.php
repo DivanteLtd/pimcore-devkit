@@ -162,6 +162,10 @@ class MigrationService
         }
     }
 
+    /**
+     * @param string $key
+     * @return Fieldcollection\Definition
+     */
     public function getOrCreateFieldCollection(string $key): Fieldcollection\Definition
     {
         try {
@@ -179,6 +183,11 @@ class MigrationService
         return $fc;
     }
 
+    /**
+     * @param string $filePath
+     * @param Fieldcollection\Definition $fc
+     * @return void
+     */
     public function updateFieldCollection(string $filePath, Fieldcollection\Definition $fc): void
     {
         try {
