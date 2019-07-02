@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2019 Divante Ltd. (https://divante.co)
  */
 
-namespace Tests\PimcoreDevkitBundle\FileLocator\ClassFilesLocatorTest;
+namespace Tests\PimcoreDevkitBundle\FileLocator;
 
 use PimcoreDevkitBundle\FileLocator\PimcoreBundlesFilesLocator;
 use PimcoreDevkitBundle\FileLocator\PimcoreClassLocator;
@@ -19,9 +19,9 @@ use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * Class ClassFilesLocatorTest
- * @package Tests\PimcoreDevkitBundle\FileLocator\ClassFilesLocatorTest
+ * @package Tests\PimcoreDevkitBundle\FileLocator
  */
-class ClassFilesLocatorTest extends WebTestCase
+class PimcoreClassLocatorTest extends WebTestCase
 {
     /**
      * @param array $listOfBundles
@@ -115,8 +115,6 @@ class ClassFilesLocatorTest extends WebTestCase
     }
 
     /**
-     * @covers \PimcoreDevkitBundle\FileLocator\PimcoreBundlesFilesLocator::getBundleCatalogList
-     * @return void
      * @throws \ReflectionException
      */
     public function testGetBundleCatalogListWithSingleCustomBundle()
@@ -129,8 +127,6 @@ class ClassFilesLocatorTest extends WebTestCase
     }
 
     /**
-     * @covers \PimcoreDevkitBundle\FileLocator\PimcoreBundlesFilesLocator::getBundleCatalogList
-     * @return void
      * @throws \ReflectionException
      */
     public function testGetBundleListWithoutCustomBundle()
@@ -143,8 +139,6 @@ class ClassFilesLocatorTest extends WebTestCase
     }
 
     /**
-     * @covers \PimcoreDevkitBundle\FileLocator\PimcoreBundlesFilesLocator::getClassName
-     * @return void
      * @throws \ReflectionException
      */
     public function testGetClassNameFromClassFile()
@@ -156,9 +150,6 @@ class ClassFilesLocatorTest extends WebTestCase
         $this->assertEquals($expected, $method->invokeArgs($obj, [$data]));
     }
 
-    /**
-     * @covers \PimcoreDevkitBundle\FileLocator\PimcoreBundlesFilesLocator::getClassName
-     */
     public function testGetClassNameFromNotJsonFile()
     {
         $data = 'index.php';
@@ -168,8 +159,6 @@ class ClassFilesLocatorTest extends WebTestCase
     }
 
     /**
-     * @covers \PimcoreDevkitBundle\FileLocator\PimcoreBundlesFilesLocator::getClassName
-     * @return void
      * @throws \ReflectionException
      */
     public function testGetClassNameFromNotClassFile()
@@ -181,8 +170,6 @@ class ClassFilesLocatorTest extends WebTestCase
     }
 
     /**
-     * @covers \PimcoreDevkitBundle\FileLocator\PimcoreBundlesFilesLocator::getClassFiles
-     * @return void
      * @throws \ReflectionException
      */
     public function testGetClassFileArrayFromBundles()
