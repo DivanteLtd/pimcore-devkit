@@ -3,6 +3,7 @@ language: php
 cache:
     directories:
         - $HOME/.cache/composer
+
 services:
     - mysql
 
@@ -11,6 +12,7 @@ addons:
 
 env:
     global:
+        - CREATE_DB=false
         - DB_HOST=localhost
         - DB_PORT=3306
         - DB_USERNAME=root
@@ -19,11 +21,6 @@ env:
         - PIMCORE_ENVIRONMENT=test
         - PIMCORE_TEST=1
         - PIMCORE_TEST_DB_DSN="mysql://root@localhost/pimcore_test"
-
-before_install:
-    #- mysql --version
-    - mysql -e "SET GLOBAL innodb_file_format=Barracuda;"
-    - mysql -e "SET GLOBAL innodb_large_prefix=1;"
 
 install:
     - ./scripts/install.sh
