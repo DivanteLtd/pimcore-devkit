@@ -1,8 +1,8 @@
 # Pimcore DevKit
 [![Build Status](https://travis-ci.org/DivanteLtd/pimcore-devkit.svg?branch=master)](https://travis-ci.org/DivanteLtd/pimcore-devkit)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/867f5904381d4e3a86bf33f2b5a99401)](https://www.codacy.com/app/Divante/pimcore-devkit?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DivanteLtd/pimcore-devkit&amp;utm_campaign=Badge_Grade)
-[![Latest Stable Version](https://poser.pugx.org/divante-ltd/pimcore-devkit/v/stable)](https://packagist.org/packages/divante-ltd/pimcore-devkit)
-[![Total Downloads](https://poser.pugx.org/divante-ltd/pimcore-devkit/downloads)](https://packagist.org/packages/divante-ltd/pimcore-devkit)
+[![Latest Stable Version](https://poser.pugx.org/divanteltd/pimcoredevkit/v/stable)](https://packagist.org/packages/divanteltd/pimcoredevkit)
+[![Total Downloads](https://poser.pugx.org/divanteltd/pimcoredevkit/downloads)](https://packagist.org/packages/divanteltd/pimcoredevkit)
 [![License](https://poser.pugx.org/divante-ltd/pimcore-devkit/license)](https://github.com/DivanteLtd/pimcore-devkit/blob/master/LICENSE)
 
 Pimcore DevKit is a set of tools that helps developing Pimcore applications. It is intended to wrap Pimcore classess to enable easy use of them.
