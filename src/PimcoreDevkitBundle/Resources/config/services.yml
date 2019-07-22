@@ -25,7 +25,7 @@ services:
         arguments: ['@Pimcore\Extension\Bundle\PimcoreBundleManager', '@pimcore_devkit.symfony_finder']
 
     PimcoreDevkitBundle\FileLocator\PimcoreBrickLocator:
-        class: ClassInstallerBundle\FileLocator\PimcoreBrickLocator
+        class: PimcoreDevkitBundle\FileLocator\PimcoreBrickLocator
         arguments: ['@Pimcore\Extension\Bundle\PimcoreBundleManager', '@pimcore_devkit.symfony_finder']
 
     PimcoreDevkitBundle\Command\:
