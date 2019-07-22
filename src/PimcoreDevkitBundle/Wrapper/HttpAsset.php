@@ -83,7 +83,10 @@ class HttpAsset implements HttpAssetInterface
      */
     public function getFileType(): string
     {
-        return strval(array_search($this->getContentType(), \Pimcore::getContainer()->getParameter('pimcore.mime.extensions')));
+        return strval(array_search(
+            $this->getContentType(),
+            \Pimcore::getContainer()->getParameter('pimcore.mime.extensions')
+        ));
     }
 
     /**
@@ -131,7 +134,8 @@ class HttpAsset implements HttpAssetInterface
     }
 
     /**
-     * @param string|null $filename
+     * @param string $filename
+     * @return void
      */
     protected function setAssetFilename(?string $filename)
     {
@@ -144,7 +148,7 @@ class HttpAsset implements HttpAssetInterface
     }
 
     /**
-     *
+     * @return void
      */
     protected function generateAssetFilename(): void
     {

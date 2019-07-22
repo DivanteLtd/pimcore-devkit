@@ -21,7 +21,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class RemoveAllObjectsCommand extends ContainerAwareCommand
 {
     /**
-     * @inheritdoc
+     * @return void
      */
     protected function configure()
     {
@@ -38,12 +38,9 @@ class RemoveAllObjectsCommand extends ContainerAwareCommand
     }
 
     /**
-     * @inheritdoc
-     *
      * @param InputInterface  $input
      * @param OutputInterface $output
-     *
-     * @return int|null|void
+     * @return void
      * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output)

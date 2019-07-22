@@ -43,7 +43,7 @@ class AssetService
     {
         /** @var Asset $parent */
         $parent = Asset::getById($parentId);
-        $key    = Asset\Service::getValidKey($key, 'folder');
+        $key = Asset\Service::getValidKey($key, 'folder');
         $path = $parent->getRealFullPath() . '/' . $key;
 
         $folder = Folder::getByPath($path);
@@ -51,15 +51,15 @@ class AssetService
             $folder = Folder::create(
                 $parentId,
                 [
-                    'parentId'         => $parentId,
-                    'creationDate'     => time(),
-                    'userOwner'        => 0,
+                    'parentId' => $parentId,
+                    'creationDate' => time(),
+                    'userOwner' => 0,
                     'userModification' => 0,
-                    'path'             => $key,
-                    'published'        => true,
-                    'type'             => 'folder',
-                    'locked'           => true,
-                    'filename'         => $key,
+                    'path' => $key,
+                    'published' => true,
+                    'type' => 'folder',
+                    'locked' => true,
+                    'filename' => $key,
                 ]
             );
         }
@@ -68,9 +68,7 @@ class AssetService
     }
 
     /**
-     * @param string $url
-     * @return HttpAsset
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return ClientInterface
      */
     protected function getHttpClient(): ClientInterface
     {
@@ -128,7 +126,7 @@ class AssetService
 
         if (!$asset) {
             throw new FileNotFoundException(
-                "Asset with path ". $targetFolder ."/". $key ." was not found"
+                "Asset with path " . $targetFolder . "/" . $key . " was not found"
             );
         }
 

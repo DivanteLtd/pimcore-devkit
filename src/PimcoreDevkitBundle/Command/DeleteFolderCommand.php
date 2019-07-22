@@ -22,12 +22,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 class DeleteFolderCommand extends AbstractCommand
 {
     /**
-     * {@inheritdoc}
+     * @return void
      */
-    protected function configure() : void
+    protected function configure(): void
     {
-        $helpMessage =  "This command allows you to delete folder in tree without hassle of blocking admin UI.".PHP_EOL;
-        $helpMessage .= "Example usage:".PHP_EOL;
+        $helpMessage = "This command allows you to delete folder in tree without hassle of blocking admin UI.";
+        $helpMessage .= PHP_EOL;
+        $helpMessage .= "Example usage:" . PHP_EOL;
         $helpMessage .= "bin/console devkit:deletefolder -t object -f /bigUglyFolder";
 
         $this
@@ -39,18 +40,20 @@ class DeleteFolderCommand extends AbstractCommand
     }
 
     /**
-     * {@inheritdoc}
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return void
      */
-    protected function execute(InputInterface $input, OutputInterface $output) : void
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $type = $input->getOption("type");
-        if(!$type) {
+        if (!$type) {
             $output->writeln("Missing -t option.");
             return;
         }
 
         $path = $input->getOption("folder");
-        if(!$path) {
+        if (!$path) {
             $output->writeln("Missing -f option.");
             return;
         }
@@ -71,22 +74,22 @@ class DeleteFolderCommand extends AbstractCommand
                     return;
             }
 
-            $output->writeln("Folder ".$path." has been deleted.");
+            $output->writeln("Folder " . $path . " has been deleted.");
         } catch (\Exception $e) {
             $output->writeln($e->getMessage());
         }
-
     }
 
     /**
      * @param string $path
+     * @return void
      * @throws \Exception
      */
     protected function deleteObject(string $path)
     {
         $folder = Folder::getByPath($path);
-        if(!$folder) {
-            throw new \Exception("Object with path ".$path." does not exist.");
+        if (!$folder) {
+            throw new \Exception("Object with path " . $path . " does not exist.");
         } else {
             $folder->delete();
         }
@@ -94,13 +97,14 @@ class DeleteFolderCommand extends AbstractCommand
 
     /**
      * @param string $path
+     * @return void
      * @throws \Exception
      */
     protected function deleteDocument(string $path)
     {
         $folder = \Pimcore\Model\Document\Folder::getByPath($path);
-        if(!$folder) {
-            throw new \Exception("Document with path ".$path." does not exist.");
+        if (!$folder) {
+            throw new \Exception("Document with path " . $path . " does not exist.");
         } else {
             $folder->delete();
         }
@@ -108,16 +112,16 @@ class DeleteFolderCommand extends AbstractCommand
 
     /**
      * @param string $path
+     * @return void
      * @throws \Exception
      */
     protected function deleteAssetFolder(string $path)
     {
         $folder = \Pimcore\Model\Asset\Folder::getByPath($path);
-        if(!$folder) {
-            throw new \Exception("Asset folder with path ".$path." does not exist.");
+        if (!$folder) {
+            throw new \Exception("Asset folder with path " . $path . " does not exist.");
         } else {
             $folder->delete();
         }
     }
-
 }

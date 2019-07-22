@@ -33,11 +33,12 @@ class DocumentConfiguration
     protected $class;
 
     /**
-     * @param string $documentClassFqcn
-     * @param string $controller
-     * @param string $action
-     * @param string $template
-     * @param string $module
+     * DocumentConfiguration constructor.
+     * @param string|null $documentClassFqcn
+     * @param string|null $controller
+     * @param string|null $action
+     * @param string|null $template
+     * @param string|null $module
      */
     public function __construct(
         string $documentClassFqcn = null,
@@ -55,6 +56,7 @@ class DocumentConfiguration
 
     /**
      * @param string $controller
+     * @return void
      */
     public function setController(string $controller)
     {
@@ -79,6 +81,7 @@ class DocumentConfiguration
 
     /**
      * @param string $action
+     * @return void
      */
     public function setAction(string $action)
     {
@@ -88,13 +91,14 @@ class DocumentConfiguration
     /**
      * @return string
      */
-    public function getTemplate():? string
+    public function getTemplate()
     {
         return $this->template;
     }
 
     /**
      * @param string $template
+     * @return void
      */
     public function setTemplate(string $template)
     {
@@ -104,13 +108,14 @@ class DocumentConfiguration
     /**
      * @return string
      */
-    public function getModule():? string
+    public function getModule()
     {
         return $this->module;
     }
 
     /**
      * @param string $module
+     * @return void
      */
     public function setModule(string $module)
     {
@@ -127,6 +132,7 @@ class DocumentConfiguration
 
     /**
      * @param string $classFqcn
+     * @return void
      */
     public function setDocumentFqcn(string $classFqcn)
     {

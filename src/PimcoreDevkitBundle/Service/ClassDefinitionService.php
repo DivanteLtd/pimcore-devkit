@@ -22,8 +22,9 @@ class ClassDefinitionService
      * @param callable $callback
      * Will run $callback on every Data
      */
-    public function traverseDefinition(array &$definition, Callable $callback) {
-        foreach($definition as $def) {
+    public function traverseDefinition(array &$definition, callable $callback)
+    {
+        foreach ($definition as $def) {
             if (method_exists($def, "hasChildren")) {
                 if ($def->hasChildren()) {
                     $this->traverseDefinition($def->getChildren(), $callback);
@@ -37,14 +38,14 @@ class ClassDefinitionService
     }
 
     /**
-     * @param ClassDefinition\Layout $definition
+     * @param ClassDefinition\Layout $layout
      * @param callable $callback
-     * Will run $callback on every Data
      */
-    public function traverseLayout(ClassDefinition\Layout &$layout, Callable $callback) {
+    public function traverseLayout(ClassDefinition\Layout &$layout, callable $callback)
+    {
         $callback($layout);
 
-        foreach($layout->childs as $child) {
+        foreach ($layout->childs as $child) {
             if ($child instanceof ClassDefinition\Layout) {
                 $this->traverseLayout($child, $callback);
             }
@@ -54,21 +55,21 @@ class ClassDefinitionService
     /**
      * @param array $definition
      * @param string $name
-     * @param $newValue
+     * @param string $newValue
      * @return array Definition
      */
-    public function replaceDefinition(array $definition, string $name, $newValue) : array
+    public function replaceDefinition(array $definition, string $name, $newValue): array
     {
-        foreach($definition as $key => &$def) {
+        foreach ($definition as $key => &$def) {
             if (method_exists($def, "getName")) {
                 if ($def->getName() == $name) {
-                   $definition[$key] = $newValue;
-                   return $definition;
+                    $definition[$key] = $newValue;
+                    return $definition;
                 }
             }
         }
 
-        foreach($definition as $key => $def) {
+        foreach ($definition as $key => $def) {
             if (method_exists($def, "hasChildren")) {
                 if ($def->hasChildren()) {
                     $def->setChildren($this->replaceDefinition($def->getChildren(), $name, $newValue));

@@ -27,7 +27,7 @@ class Dao implements DaoInterface
     protected $db;
 
     /**
-     *
+     * @return void
      */
     public function configure()
     {
@@ -36,6 +36,7 @@ class Dao implements DaoInterface
 
     /**
      * @param int $id
+     * @return void
      * @throws \Exception
      */
     public function getById($id = null)
@@ -54,6 +55,7 @@ class Dao implements DaoInterface
     }
 
     /**
+     * @return void
      * @throws \Exception
      */
     public function save()
@@ -77,7 +79,7 @@ class Dao implements DaoInterface
     }
 
     /**
-     *
+     * @return void
      */
     public function delete()
     {
@@ -85,7 +87,8 @@ class Dao implements DaoInterface
     }
 
     /**
-     * @param $name string
+     * @param string $name
+     * @return void
      */
     protected function setFile($name)
     {

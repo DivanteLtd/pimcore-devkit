@@ -18,7 +18,7 @@ use Pimcore\File;
 class CustomViews extends PhpArrayFileTable
 {
     /**
-     * @param $filePath string
+     * @param string $filePath
      * @return CustomViews
      */
     public static function get($filePath)
@@ -31,7 +31,7 @@ class CustomViews extends PhpArrayFileTable
     }
 
     /**
-     *
+     * @return void
      */
     protected function load()
     {
@@ -48,7 +48,7 @@ class CustomViews extends PhpArrayFileTable
     }
 
     /**
-     *
+     * @return void
      */
     protected function save()
     {
