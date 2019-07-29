@@ -15,19 +15,3 @@ services:
     PimcoreDevkitBundle\Service\DocumentService: ~
     PimcoreDebkitBundle\Service\CustomLayoutService:
        arguments: ['@serializer']
-
-    pimcore_devkit.symfony_finder:
-        class: Symfony\Component\Finder\Finder
-        public: false
-
-    PimcoreDevkitBundle\FileLocator\PimcoreClassLocator:
-        class: PimcoreDevkitBundle\FileLocator\PimcoreClassLocator
-        arguments: ['@Pimcore\Extension\Bundle\PimcoreBundleManager', '@pimcore_devkit.symfony_finder']
-
-    PimcoreDevkitBundle\FileLocator\PimcoreBrickLocator:
-        class: PimcoreDevkitBundle\FileLocator\PimcoreBrickLocator
-        arguments: ['@Pimcore\Extension\Bundle\PimcoreBundleManager', '@pimcore_devkit.symfony_finder']
-
-    PimcoreDevkitBundle\Command\:
-        resource: '../../Command/*'
-        tags: ['console.command']
