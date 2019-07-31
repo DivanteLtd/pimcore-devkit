@@ -15,3 +15,7 @@ services:
     PimcoreDevkitBundle\Service\DocumentService: ~
     PimcoreDebkitBundle\Service\CustomLayoutService:
        arguments: ['@serializer']
+
+    PimcoreDevkitBundle\Command\:
+        resource: '../../Command/*'
+        tags: ['console.command']
