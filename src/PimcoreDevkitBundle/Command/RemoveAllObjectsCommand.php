@@ -48,11 +48,10 @@ class RemoveAllObjectsCommand extends ContainerAwareCommand
         $classesList = $input->getOption('classes');
 
         $classesNames = explode(',', $classesList);
+        $service = new DataObjectService();
         foreach ($classesNames as $className) {
             $fullClassName = "\\Pimcore\\Model\\DataObject\\" . $className;
             $output->write("Removing all objects of class: $fullClassName ... ");
-            /** @var DataObjectService $service */
-            $service = $this->getContainer()->get(DataObjectService::class);
             $cnt = 0;
             foreach ($service->removeAllObjects($fullClassName) as $message) {
                 ++$cnt;
