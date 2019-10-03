@@ -30,12 +30,12 @@ abstract class PimcoreBundlesFilesLocator
     /**
      * ClassFilesLocator constructor.
      * @param PimcoreBundleManager $bundleManager
-     * @param Finder               $finder
+     * @param Finder $finder
      */
     public function __construct(PimcoreBundleManager $bundleManager, Finder $finder)
     {
         $this->bundleManager = $bundleManager;
-        $this->finder        = $finder;
+        $this->finder = $finder;
     }
 
     /**
