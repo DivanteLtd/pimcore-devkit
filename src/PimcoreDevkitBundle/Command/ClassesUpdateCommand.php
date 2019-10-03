@@ -22,7 +22,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  */
 class ClassesUpdateCommand extends Command
 {
-    protected static $defaultName = 'classes:update';
+    protected static $defaultName = 'devkit:classes:update';
     /**
      * @var PimcoreClassLocator
      */

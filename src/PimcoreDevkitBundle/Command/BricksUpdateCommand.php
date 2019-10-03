@@ -23,7 +23,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class BricksUpdateCommand extends Command
 {
     /** @var string $defaultName */
-    protected static $defaultName = 'bricks:update';
+    protected static $defaultName = 'devkit:bricks:update';
 
     /** @var PimcoreBrickLocator $locator */
     private $locator;
