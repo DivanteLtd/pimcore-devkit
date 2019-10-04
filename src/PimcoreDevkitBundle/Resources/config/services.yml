@@ -1,4 +1,23 @@
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Symfony\Component\Finder\Finder: ~
+
+    PimcoreDevkitBundle\FileLocator\PimcoreClassLocator:
+        class: PimcoreDevkitBundle\FileLocator\PimcoreClassLocator
+        arguments: ['@Pimcore\Extension\Bundle\PimcoreBundleManager', '@Symfony\Component\Finder\Finder']
+
+    PimcoreDevkitBundle\FileLocator\PimcoreBrickLocator:
+        class: PimcoreDevkitBundle\FileLocator\PimcoreBrickLocator
+        arguments: ['@Pimcore\Extension\Bundle\PimcoreBundleManager', '@Symfony\Component\Finder\Finder']
+
+    PimcoreDevkitBundle\Command\:
+        resource: '../../Command/*'
+        tags: ['console.command']
+
     PimcoreDevkitBundle\Service\InstallerService: ~
     PimcoreDevkitBundle\Service\WorkflowService: ~
     PimcoreDevkitBundle\Service\ClassDefinitionService: ~
@@ -14,4 +33,4 @@ services:
     PimcoreDevkitBundle\Service\MigrationService: ~
     PimcoreDevkitBundle\Service\DocumentService: ~
     PimcoreDebkitBundle\Service\CustomLayoutService:
-       arguments: ['@serializer']
+        arguments: ['@serializer']
