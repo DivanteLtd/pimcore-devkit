@@ -50,10 +50,3 @@ jobs:
         run: |
           cd tmp
           ./vendor/bin/phpunit --coverage-text
-
-      - name: Functional Tests
-        env:
-          PIMCORE_TEST_DB_DSN: "mysql://root:root@localhost/pimcore_test"
-        run: |
-          cd tmp
-          ./vendor/bin/codecept run -c tests/codeception.dist.yml
