@@ -20,11 +20,14 @@ use Pimcore\Model\WebsiteSetting;
 
 /**
  * Class InstallerService
- *
  * @package PimcoreDevkitBundle\Service
+ * @SuppressWarnings(PHPMD)
  */
 class InstallerService
 {
+    /** @var array $errors */
+    private $errors = [];
+
     /**
      * @param string $wsName
      * @param int $parentId
@@ -37,8 +40,8 @@ class InstallerService
         $setting = null;
         try {
             $setting = WebsiteSetting::getByName($wsName);
-        } catch (\Exception $e) {
-            // ignore
+        } catch (\Exception $exception) {
+            $this->errors[] = $exception;
         }
 
         if ($setting instanceof WebsiteSetting && $setting->getData()) {
@@ -77,8 +80,8 @@ class InstallerService
         $setting = null;
         try {
             $setting = WebsiteSetting::getByName($wsName);
-        } catch (\Exception $e) {
-            // ignore
+        } catch (\Exception $exception) {
+            $this->errors[] = $exception;
         }
 
         if ($setting instanceof WebsiteSetting && $setting->getData()) {
@@ -117,8 +120,8 @@ class InstallerService
         $setting = null;
         try {
             $setting = WebsiteSetting::getByName($wsName);
-        } catch (\Exception $e) {
-            // ignore
+        } catch (\Exception $exception) {
+            $this->errors[] = $exception;
         }
 
         if ($setting instanceof WebsiteSetting && $setting->getData()) {
@@ -167,8 +170,8 @@ class InstallerService
         $class = null;
         try {
             $class = ClassDefinition::getByName($name);
-        } catch (\Exception $e) {
-            // ignore
+        } catch (\Exception $exception) {
+            $this->errors[] = $exception;
         }
         if (false === $class instanceof ClassDefinition) {
             $class = ClassDefinition::create(['name' => $name, 'userOwner' => 0]);
@@ -194,8 +197,8 @@ class InstallerService
             }
 
             return false;
-        } catch (\Exception $e) {
-            // ignore
+        } catch (\Exception $exception) {
+            $this->errors[] = $exception;
         }
 
         return false;
@@ -210,13 +213,14 @@ class InstallerService
     {
         try {
             $brick = ObjectbrickDefinition::getByKey($key);
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
+            $this->errors[] = $exception;
         }
+
         if (!$brick) {
             $brick = new ObjectbrickDefinition();
             $brick->setKey($key);
         }
-        
 
         $json = file_get_contents($jsonFilePath);
 
@@ -234,7 +238,9 @@ class InstallerService
     {
         try {
             $fieldcollection = FieldcollectionDefinition::getByKey($key);
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
+            $this->errors[] = $exception;
+
             $fieldcollection = new FieldcollectionDefinition();
             $fieldcollection->setKey($key);
         }
@@ -270,6 +276,7 @@ class InstallerService
 
     /**
      * @param string $permission
+     * @throws \Exception
      */
     public function createPermission(string $permission)
     {
