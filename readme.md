@@ -16,7 +16,6 @@ to enable easy use of them.
 	- [Installing/Getting started](#installinggetting-started)
 	- [Features](#features)
 		- [Commands](#commands)
-	- [Configuration](#configuration)
 	- [Contributing](#contributing)
 	- [Licensing](#licensing)
 	- [Standards & Code Quality](#standards--code-quality)
@@ -28,30 +27,33 @@ This module is compatible with Pimcore 5.3.0 and higher.
 
 ## Installing/Getting started
 
+```bash
 composer require divanteltd/pimcoredevkit
+```
 
 ## Features
 
 ### Commands
 
 #### `devkit:asset:synchronize`
+
 Synchronizes assets tree with filesystem changes
 
 #### `devkit:delete_by_id`
+
 Deletes object, document, asset from given tree
 
 #### `devkit:deletefolder`
+
 Deletes folder from given tree
 
 #### `devkit:classes:update`
+
 Updates class definition from json
 
 #### `devkit:bricks:update`
+
 Updates bricks definition from json
-
-## Configuration
-
-No configuration is needed.
 
 ## Contributing
 
