@@ -169,33 +169,33 @@ class MigrationService
     public function getOrCreateFieldCollection(string $key): Fieldcollection\Definition
     {
         try {
-            $fc = Fieldcollection\Definition::getByKey($key);
+            $fieldCollection = Fieldcollection\Definition::getByKey($key);
         } catch (\Exception $ex) {
-            $fc = null;
+            $fieldCollection = null;
             Simple::log(self::LOG_FILE, $ex);
         }
 
-        if (!$fc instanceof Fieldcollection\Definition) {
-            $fc = new Fieldcollection\Definition();
-            $fc->setKey($key);
+        if (!$fieldCollection instanceof Fieldcollection\Definition) {
+            $fieldCollection = new Fieldcollection\Definition();
+            $fieldCollection->setKey($key);
         }
 
-        return $fc;
+        return $fieldCollection;
     }
 
     /**
      * @param string $filePath
-     * @param Fieldcollection\Definition $fc
+     * @param Fieldcollection\Definition $fieldCollection
      * @return void
      */
-    public function updateFieldCollection(string $filePath, Fieldcollection\Definition $fc): void
+    public function updateFieldCollection(string $filePath, Fieldcollection\Definition $fieldCollection): void
     {
         try {
             $json = file_get_contents($filePath);
-            ClassDefinition\Service::importFieldCollectionFromJson($fc, $json, true);
+            ClassDefinition\Service::importFieldCollectionFromJson($fieldCollection, $json, true);
         } catch (\Exception $ex) {
             throw new InstallationException(
-                'An error occurred while installing field collection: ' . $fc->getKey(),
+                'An error occurred while installing field collection: ' . $fieldCollection->getKey(),
                 0,
                 $ex
             );

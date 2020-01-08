@@ -24,7 +24,7 @@ class Dao implements DaoInterface
     /**
      * @var CustomViews
      */
-    protected $db;
+    protected $dataBase;
 
     /**
      * @return void
@@ -45,7 +45,7 @@ class Dao implements DaoInterface
             $this->model->setId($id);
         }
 
-        $data = $this->db->getById($this->model->getId());
+        $data = $this->dataBase->getById($this->model->getId());
 
         if (isset($data['id'])) {
             $this->assignVariablesToModel($data);
@@ -68,13 +68,13 @@ class Dao implements DaoInterface
                 $data[$key] = $value;
             }
 
-            $this->db->insertOrUpdate($data, $this->model->getId());
+            $this->dataBase->insertOrUpdate($data, $this->model->getId());
         } catch (\Exception $e) {
             throw $e;
         }
 
         if (!$this->model->getId()) {
-            $this->model->setId($this->db->getLastInsertId());
+            $this->model->setId($this->dataBase->getLastInsertId());
         }
     }
 
@@ -83,7 +83,7 @@ class Dao implements DaoInterface
      */
     public function delete()
     {
-        $this->db->delete($this->model->getId());
+        $this->dataBase->delete($this->model->getId());
     }
 
     /**
@@ -93,6 +93,6 @@ class Dao implements DaoInterface
     protected function setFile($name)
     {
         $file = Config::locateConfigFile($name . '.php');
-        $this->db = CustomViews::get($file);
+        $this->dataBase = CustomViews::get($file);
     }
 }

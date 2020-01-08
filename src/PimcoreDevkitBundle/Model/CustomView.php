@@ -14,6 +14,7 @@ use Pimcore\Logger;
 /**
  * Class CustomView
  * @package PimcoreDevkitBundle\Model
+ * @SuppressWarnings(PHPMD)
  */
 class CustomView extends AbstractModel
 {
