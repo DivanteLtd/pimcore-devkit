@@ -16,6 +16,7 @@ to enable easy use of them.
 	- [Installing/Getting started](#installinggetting-started)
 	- [Features](#features)
 		- [Commands](#commands)
+		- [WYSIWYG with image metadata](#wysiwyg)
 	- [Contributing](#contributing)
 	- [Licensing](#licensing)
 	- [Standards & Code Quality](#standards--code-quality)
@@ -54,6 +55,36 @@ Updates class definition from json
 #### `devkit:bricks:update`
 
 Updates bricks definition from json
+
+### WYSIWYG with metadata
+
+Standard Pimcore implementation does not use images metadata, when used in WYSIWYG.
+To enable this feature, you can use brick `WYSIWYG with metadata` which provides also simple view file.
+To use more sophisticated view (e. g. styled) you can create your own brick with a class derived from `\PimcoreDevkitBundle\Document\Areabrick\WysiwygWithMetadata`.
+Example implementation:
+```
+namespace AppBundle\Document\Areabrick;
+
+use PimcoreDevkitBundle\Document\Areabrick\WysiwygWithMetadata;
+
+class Wysiwyg extends \PimcoreDevkitBundle\Document\Areabrick\WysiwygWithMetadata
+{
+    public function getName()
+    {
+        return "WYSIWYG";
+    }
+
+    public function getIcon()
+    {
+        return '/bundles/pimcoreadmin/img/flat-color-icons/wysiwyg.svg';
+    }
+
+    public function getTemplateLocation()
+    {
+        return static::TEMPLATE_LOCATION_GLOBAL;
+    }
+}
+```
 
 ## Contributing
 
