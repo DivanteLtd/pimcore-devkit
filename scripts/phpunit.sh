@@ -2,4 +2,4 @@
 
 echo -e "\e[34m=> Unit Tests \e[0m"
 
-./vendor/bin/phpunit --coverage-text
+./vendor/bin/phpunit --coverage-text --verbose
