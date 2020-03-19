@@ -41,7 +41,10 @@ class WysiwygService
     public function addMetaToImages(string $html, string $lang = ''): string
     {
         $doc = new \DOMDocument();
-        $doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+        $doc->loadHTML(
+            mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'),
+            LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
+        );
 
         /** @var \DOMElement $imgNode */
         foreach ($doc->getElementsByTagName('img') as $imgNode) {
