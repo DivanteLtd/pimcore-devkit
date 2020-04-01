@@ -6,6 +6,7 @@ namespace PimcoreDevkitBundle\Service\Wysiwyg;
 
 use PimcoreDevkitBundle\Model\AssetSeoData;
 use Pimcore\Model\Asset;
+use PimcoreDevkitBundle\Service\DomService;
 
 /**
  * Class WysiwygService
@@ -24,14 +25,23 @@ class WysiwygService
     private $assetFinderService;
 
     /**
-     * Wysiwyg constructor.
+     * @var DomService
+     */
+    private $domService;
+
+    /**
      * @param AssetSeoService $assetSeoService
      * @param AssetFinderService $assetFinderService
+     * @param DomService $domService
      */
-    public function __construct(AssetSeoService $assetSeoService, AssetFinderService $assetFinderService)
-    {
+    public function __construct(
+        AssetSeoService $assetSeoService,
+        AssetFinderService $assetFinderService,
+        DomService $domService
+    ) {
         $this->assetSeoService    = $assetSeoService;
         $this->assetFinderService = $assetFinderService;
+        $this->domService         = $domService;
     }
 
     /**
@@ -40,11 +50,11 @@ class WysiwygService
      */
     public function addMetaToImages(string $html, string $lang = ''): string
     {
-        $doc = new \DOMDocument();
-        $doc->loadHTML(
-            mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'),
-            LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
-        );
+        if (!$html) {
+            return '';
+        }
+
+        $doc = $this->domService->loadHTML($html);
 
         /** @var \DOMElement $imgNode */
         foreach ($doc->getElementsByTagName('img') as $imgNode) {
