@@ -55,7 +55,18 @@ class WysiwygService
         }
 
         $doc = $this->domService->loadHTML($html);
+        $doc = $this->addMetaToDomImages($doc, $lang);
 
+        return $doc->saveHTML();
+    }
+
+    /**
+     * @param \DOMDocument $doc
+     * @param string $lang
+     * @return \DOMDocument
+     */
+    public function addMetaToDomImages(\DOMDocument $doc, string $lang = ''): \DOMDocument
+    {
         /** @var \DOMElement $imgNode */
         foreach ($doc->getElementsByTagName('img') as $imgNode) {
             $src = $imgNode->getAttribute('src');
@@ -73,6 +84,6 @@ class WysiwygService
             }
         }
 
-        return $doc->saveHTML();
+        return $doc;
     }
 }
