@@ -32,5 +32,6 @@ services:
     PimcoreDevkitBundle\Service\ThumbnailConfigService: ~
     PimcoreDevkitBundle\Service\MigrationService: ~
     PimcoreDevkitBundle\Service\DocumentService: ~
-    PimcoreDebkitBundle\Service\CustomLayoutService:
+    PimcoreDevkitBundle\Service\CustomLayoutService:
         arguments: ['@serializer']
+    PimcoreDevkitBundle\Service\Wysiwyg\WysiwygService: ~
