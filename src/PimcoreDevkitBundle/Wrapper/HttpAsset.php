@@ -64,9 +64,10 @@ class HttpAsset implements HttpAssetInterface
         string $url,
         Folder $targetFolder,
         string $filename = null,
-        string $defaultFileType = 'txt'
+        string $defaultFileType = 'txt',
+        array  $headers = []
     ) {
-        $this->response = $httpClient->request('GET', $url, ['timeout' => 5, 'connect_timeout' => 2]);
+        $this->response = $httpClient->request('GET', $url, ['headers' => $headers, 'connect_timeout' => 1]);
         $statusCode = $this->response->getStatusCode();
 
         if ($statusCode != 200) {

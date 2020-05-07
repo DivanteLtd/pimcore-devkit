@@ -26,7 +26,7 @@ use Pimcore\Tool;
  */
 class AssetService
 {
-    private const DEFAULT_FILE_TYPE = 'txt';
+    public const DEFAULT_FILE_TYPE = 'txt';
 
     /** @var ClientInterface */
     protected $httpClient;
@@ -79,20 +79,11 @@ class AssetService
     }
 
     /**
-     * @param string $url
-     * @param Folder $targetFolder
-     * @param null $filename
-     * @param string $defaultFileType
-     * @return HttpAssetInterface
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @param ClientInterface $httpClient
      */
-    public function prepareHttpAsset(
-        string $url,
-        Folder $targetFolder,
-        $filename = null,
-        string $defaultFileType = self::DEFAULT_FILE_TYPE
-    ): HttpAssetInterface {
-        return new HttpAsset($this->getHttpClient(), $url, $targetFolder, $filename, $defaultFileType);
+    public function setHttpClient(ClientInterface $httpClient): void
+    {
+        $this->httpClient = $httpClient;
     }
 
     /**
@@ -100,6 +91,26 @@ class AssetService
      * @param Folder $targetFolder
      * @param null $filename
      * @param string $defaultFileType
+     * @param array $headers Headers to append
+     * @return HttpAssetInterface
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function prepareHttpAsset(
+        string $url,
+        Folder $targetFolder,
+        $filename = null,
+        string $defaultFileType = self::DEFAULT_FILE_TYPE,
+        array  $headers = []
+    ): HttpAssetInterface {
+        return new HttpAsset($this->getHttpClient(), $url, $targetFolder, $filename, $defaultFileType, $headers);
+    }
+
+    /**
+     * @param string $url
+     * @param Folder $targetFolder
+     * @param null $filename
+     * @param string $defaultFileType
+     * @param array $headers Headers to append
      * @return Asset
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Exception
@@ -108,9 +119,10 @@ class AssetService
         string $url,
         Folder $targetFolder,
         $filename = null,
-        string $defaultFileType = self::DEFAULT_FILE_TYPE
+        string $defaultFileType = self::DEFAULT_FILE_TYPE,
+        array  $headers = []
     ): Asset {
-        $httpAsset = $this->prepareHttpAsset($url, $targetFolder, $filename, $defaultFileType);
+        $httpAsset = $this->prepareHttpAsset($url, $targetFolder, $filename, $defaultFileType, $headers);
 
         return $httpAsset->getAsset();
     }
