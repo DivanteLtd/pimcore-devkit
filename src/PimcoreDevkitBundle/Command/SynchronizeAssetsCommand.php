@@ -92,11 +92,13 @@ class SynchronizeAssetsCommand extends AbstractCommand
      */
     public function listFolderFiles($dir)
     {
-        $ffs = rscandir($dir);
+        $files = rscandir($dir);
 
-        unset($ffs[array_search('.', $ffs, true)]);
-        unset($ffs[array_search('..', $ffs, true)]);
-
-        return $ffs;
+        return array_filter(
+            $files,
+            function ($filename) {
+                return $filename !== '.' && $filename !== '..';
+            }
+        );
     }
 }
