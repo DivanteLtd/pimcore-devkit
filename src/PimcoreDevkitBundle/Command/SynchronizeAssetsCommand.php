@@ -62,10 +62,20 @@ class SynchronizeAssetsCommand extends AbstractCommand
 
             $parentPath = substr(dirname($file), strlen(PIMCORE_ASSET_DIRECTORY)) . "/";
             $filename = basename($file);
+            $fileModificationDate = filemtime($file);
 
             // Does asset exist?
             $asset = Asset::getByPath($parentPath . $filename);
+
             if ($asset) {
+                if ($asset->getModificationDate() !== $fileModificationDate) {
+                    $asset->setModificationDate($fileModificationDate);
+                    $asset->save();
+                    $output->writeln(
+                        "Updated modification date for " . $parentPath . $filename . " (" . $asset->getType() . ")"
+                    );
+                }
+
                 continue;
             }
 
@@ -92,11 +102,13 @@ class SynchronizeAssetsCommand extends AbstractCommand
      */
     public function listFolderFiles($dir)
     {
-        $ffs = rscandir($dir);
+        $files = rscandir($dir);
 
-        unset($ffs[array_search('.', $ffs, true)]);
-        unset($ffs[array_search('..', $ffs, true)]);
-
-        return $ffs;
+        return array_filter(
+            $files,
+            function ($filename) {
+                return $filename !== '.' && $filename !== '..';
+            }
+        );
     }
 }
