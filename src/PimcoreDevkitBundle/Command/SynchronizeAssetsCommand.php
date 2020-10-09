@@ -62,10 +62,20 @@ class SynchronizeAssetsCommand extends AbstractCommand
 
             $parentPath = substr(dirname($file), strlen(PIMCORE_ASSET_DIRECTORY)) . "/";
             $filename = basename($file);
+            $fileModificationDate = filemtime($file);
 
             // Does asset exist?
             $asset = Asset::getByPath($parentPath . $filename);
+
             if ($asset) {
+                if ($asset->getModificationDate() !== $fileModificationDate) {
+                    $asset->setModificationDate($fileModificationDate);
+                    $asset->save();
+                    $output->writeln(
+                        "Updated modification date for " . $parentPath . $filename . " (" . $asset->getType() . ")"
+                    );
+                }
+
                 continue;
             }
 
