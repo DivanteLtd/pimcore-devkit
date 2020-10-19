@@ -18,20 +18,9 @@ services:
         resource: '../../Command/*'
         tags: ['console.command']
 
-    PimcoreDevkitBundle\Service\InstallerService: ~
-    PimcoreDevkitBundle\Service\WorkflowService: ~
-    PimcoreDevkitBundle\Service\ClassDefinitionService: ~
-    PimcoreDevkitBundle\Service\CustomViewService: ~
-    PimcoreDevkitBundle\Service\DataObjectService: ~
-    PimcoreDevkitBundle\Service\KeyService: ~
-    PimcoreDevkitBundle\Service\SystemSettings: ~
-    PimcoreDevkitBundle\Service\UserService: ~
-    PimcoreDevkitBundle\Service\WorkspaceService: ~
-    PimcoreDevkitBundle\Service\DocTypeService: ~
-    PimcoreDevkitBundle\Service\AssetService: ~
-    PimcoreDevkitBundle\Service\ThumbnailConfigService: ~
-    PimcoreDevkitBundle\Service\MigrationService: ~
-    PimcoreDevkitBundle\Service\DocumentService: ~
+    PimcoreDevkitBundle\Service\:
+        resource: '../../Service'
+        
     PimcoreDevkitBundle\Service\CustomLayoutService:
         arguments: ['@serializer']
         
