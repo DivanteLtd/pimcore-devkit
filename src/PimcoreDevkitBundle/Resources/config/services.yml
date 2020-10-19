@@ -34,4 +34,6 @@ services:
     PimcoreDevkitBundle\Service\DocumentService: ~
     PimcoreDevkitBundle\Service\CustomLayoutService:
         arguments: ['@serializer']
-    PimcoreDevkitBundle\Service\Wysiwyg\WysiwygService: ~
+        
+    PimcoreDevkitBundle\Service\Wysiwyg\:
+        resource: '../../Service/Wysiwyg'
