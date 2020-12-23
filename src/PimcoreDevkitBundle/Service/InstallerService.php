@@ -240,7 +240,9 @@ class InstallerService
             $fieldcollection = FieldcollectionDefinition::getByKey($key);
         } catch (\Exception $exception) {
             $this->errors[] = $exception;
+        }
 
+        if (!$fieldcollection) {
             $fieldcollection = new FieldcollectionDefinition();
             $fieldcollection->setKey($key);
         }
