@@ -25,8 +25,11 @@ class FieldcollectionsUpdateCommand extends Command
      * @param InstallerService $installerService
      * @param string|null $name
      */
-    public function __construct(PimcoreFieldcollectionLocator $locator, InstallerService $installerService, ?string $name = null)
-    {
+    public function __construct(
+        PimcoreFieldcollectionLocator $locator,
+        InstallerService $installerService,
+        ?string $name = null
+    ) {
         parent::__construct($name);
         $this->locator = $locator;
         $this->installerService = $installerService;
@@ -38,7 +41,9 @@ class FieldcollectionsUpdateCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription('Updates fieldcollections from one (if specified) or all (by default) bundles under src catalog')
+            ->setDescription(
+                'Updates fieldcollections from one (if specified) or all (by default) bundles under src catalog'
+            )
             ->addArgument('bundle', InputArgument::OPTIONAL, 'Bundle name');
     }
 
