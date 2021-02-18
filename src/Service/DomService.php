@@ -27,8 +27,7 @@ class DomService
             $doc->removeChild($doc->firstChild);
         }
 
-        while ($container->firstChild )
-        {
+        while ($container->firstChild ) {
             $doc->appendChild($container->firstChild);
         }
 
