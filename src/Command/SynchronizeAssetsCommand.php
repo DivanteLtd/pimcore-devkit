@@ -11,6 +11,7 @@ namespace PimcoreDevkitBundle\Command;
 use Pimcore\Console\AbstractCommand;
 use Pimcore\Model\Asset;
 use Pimcore\Model\DataObject\Folder;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -40,10 +41,10 @@ class SynchronizeAssetsCommand extends AbstractCommand
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @return void
+     * @return int
      * @throws \Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $folder = $input->getArgument("folder");
 
@@ -52,7 +53,7 @@ class SynchronizeAssetsCommand extends AbstractCommand
         } else {
             $folder = $folder[0];
         }
-        $files = $this->listFolderFiles(PIMCORE_ASSET_DIRECTORY . $folder);
+        $files = $this->listFolderFiles(PIMCORE_WEB_ROOT . '/var/assets' . $folder);
 
         foreach ($files as $file) {
             // Is it a directory?
@@ -60,7 +61,7 @@ class SynchronizeAssetsCommand extends AbstractCommand
                 continue;
             }
 
-            $parentPath = substr(dirname($file), strlen(PIMCORE_ASSET_DIRECTORY)) . "/";
+            $parentPath = substr(dirname($file), strlen(PIMCORE_WEB_ROOT . '/var/assets')) . "/";
             $filename = basename($file);
             $fileModificationDate = filemtime($file);
 
@@ -94,6 +95,8 @@ class SynchronizeAssetsCommand extends AbstractCommand
                 }
             }
         }
+
+        return Command::SUCCESS;
     }
 
     /**

@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace PimcoreDevkitBundle\Service\Migration;
 
+use Doctrine\Migrations\AbstractMigration;
+use Pimcore\Migrations\BundleAwareMigration;
 use PimcoreDevkitBundle\Service\MigrationService;
 use Pimcore\Migrations\Migration\AbstractPimcoreMigration as BaseMigration;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -20,7 +22,7 @@ use Symfony\Component\HttpKernel\Config\FileLocator;
  * Class AbstractPimcoreMigration
  * @package BookdataBundle\Migrations
  */
-abstract class AbstractPimcoreMigration extends BaseMigration implements ContainerAwareInterface
+abstract class AbstractPimcoreMigration extends AbstractMigration implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
