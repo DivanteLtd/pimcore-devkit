@@ -9,7 +9,7 @@
 namespace PimcoreDevkitBundle\Command;
 
 use PimcoreDevkitBundle\Service\DataObjectService;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Pimcore\Console\AbstractCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -18,7 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Class RemoveAllObjectsCommand
  * @package PimcoreDevkitBundle\Command
  */
-class RemoveAllObjectsCommand extends ContainerAwareCommand
+class RemoveAllObjectsCommand extends AbstractCommand
 {
     /**
      * @return void
