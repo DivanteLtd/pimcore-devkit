@@ -78,12 +78,14 @@ class SynchronizeAssetsCommand extends Command
                 continue;
             }
 
+            $params['versionNote'] = 'synchronized';
+
             $asset = new Asset();
             $asset->setParent(Asset\Service::createFolderByPath($parentPath));
             $asset->setFilename($filename);
             $asset->setData(file_get_contents($file));
             try {
-                $asset->save();
+                $asset->save($params);
                 $output->writeln("Saved " . $parentPath . $filename . " as " . $asset->getType());
             } catch (\Throwable $exception) {
                 $output->writeln("Couldn't save " . $parentPath . $filename);
