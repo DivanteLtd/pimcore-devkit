@@ -78,7 +78,7 @@ class SynchronizeAssetsCommand extends Command
                 continue;
             }
 
-            $params['versionNote'] = 'synchronized';
+            $params['versionNote'] = 'Synchronized using devkit:asset:synchronize';
 
             $asset = new Asset();
             $asset->setParent(Asset\Service::createFolderByPath($parentPath));
