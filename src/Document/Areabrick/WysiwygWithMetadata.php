@@ -6,7 +6,7 @@ use Pimcore\Model\Document\Tag;
 use PimcoreDevkitBundle\Service\Wysiwyg\WysiwygService;
 use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 use Pimcore\Model\Asset;
-use Pimcore\Model\Document\Editable\Area\Info;
+use Pimcore\Model\Document\Tag\Area\Info;
 
 /**
  * Class WysiwygWithMetadata
