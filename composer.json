@@ -22,7 +22,7 @@
     }
   ],
   "require": {
-    "php": ">=7.1",
+    "php": ">=7.4",
     "pimcore/pimcore": "^6.9 || ^10.0"
   },
   "require-dev": {
