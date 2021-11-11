@@ -11,6 +11,7 @@ namespace PimcoreDevkitBundle\Service;
 
 use Pimcore\Config;
 use Pimcore\File;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Class SystemSettings
@@ -24,8 +25,8 @@ class SystemSettings
      */
     public function getSettings()
     {
-        $existingConfig = Config::getSystemConfig();
-        $existingValues = $existingConfig->toArray();
+        $file = Config::locateConfigFile('system.yml');
+        $existingValues = Config::getConfigInstance($file, true);
 
         return $existingValues;
     }
@@ -35,8 +36,9 @@ class SystemSettings
      */
     public function setSettings(array $settings)
     {
-        $configFile = \Pimcore\Config::locateConfigFile('system.php');
-        File::putPhpFile($configFile, to_php_data_file_format($settings));
+        $settingsYml = Yaml::dump($settings, 5);
+        $configFile = Config::locateConfigFile('system.yml');
+        File::put($configFile, $settingsYml);
     }
 
     /**
