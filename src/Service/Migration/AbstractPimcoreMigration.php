@@ -13,7 +13,7 @@ namespace PimcoreDevkitBundle\Service\Migration;
 use Doctrine\Migrations\AbstractMigration;
 use Pimcore\Migrations\BundleAwareMigration;
 use PimcoreDevkitBundle\Service\MigrationService;
-use Pimcore\Migrations\Migration\AbstractPimcoreMigration as BaseMigration;
+use Pimcore\Migrations\BundleAwareMigration as BaseMigration;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpKernel\Config\FileLocator;
