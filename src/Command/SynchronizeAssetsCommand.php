@@ -8,7 +8,9 @@
 
 namespace PimcoreDevkitBundle\Command;
 
+use Pimcore\Console\AbstractCommand;
 use Pimcore\Model\Asset;
+use Pimcore\Model\DataObject\Folder;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -18,7 +20,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Class SynchronizeAssetsCommand
  * @package PimcoreDevkitBundle\Command
  */
-class SynchronizeAssetsCommand extends Command
+class SynchronizeAssetsCommand extends AbstractCommand
 {
     /**
      * @return void
