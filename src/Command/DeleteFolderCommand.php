@@ -9,6 +9,7 @@
 namespace PimcoreDevkitBundle\Command;
 
 use Pimcore\Console\AbstractCommand;
+use Symfony\Component\Console\Command\Command;
 use Pimcore\Model\DataObject\Folder;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -44,7 +45,7 @@ class DeleteFolderCommand extends AbstractCommand
      * @param OutputInterface $output
      * @return void
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $type = $input->getOption("type");
         if (!$type) {
@@ -78,6 +79,8 @@ class DeleteFolderCommand extends AbstractCommand
         } catch (\Exception $e) {
             $output->writeln($e->getMessage());
         }
+
+        return Command::SUCCESS;
     }
 
     /**

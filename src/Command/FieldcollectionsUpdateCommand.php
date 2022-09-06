@@ -52,7 +52,7 @@ class FieldcollectionsUpdateCommand extends Command
      * @param OutputInterface $output
      * @return int|void|null
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $inputOutput = new SymfonyStyle($input, $output);
         $bundleName = $input->getArgument('bundle');
@@ -65,5 +65,7 @@ class FieldcollectionsUpdateCommand extends Command
             $this->installerService->createFieldcollectionDefinition($fieldcollectionName, $fieldcollectionFile);
             $inputOutput->success(sprintf('Fieldcollection %s was successfully installed!', $fieldcollectionName));
         }
+
+        return Command::SUCCESS;
     }
 }

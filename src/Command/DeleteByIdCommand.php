@@ -9,6 +9,7 @@
 namespace PimcoreDevkitBundle\Command;
 
 use Pimcore\Console\AbstractCommand;
+use Symfony\Component\Console\Command\Command;
 use Pimcore\Model\Asset;
 use Pimcore\Model\Document;
 use Pimcore\Model\DataObject\AbstractObject;
@@ -46,7 +47,7 @@ class DeleteByIdCommand extends AbstractCommand
      * @param OutputInterface $output
      * @return void
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $type = $input->getOption("type");
         if (!$type) {
@@ -80,6 +81,8 @@ class DeleteByIdCommand extends AbstractCommand
         } catch (\Exception $e) {
             $output->writeln($e->getMessage());
         }
+
+        return Command::SUCCESS;
     }
 
     /**

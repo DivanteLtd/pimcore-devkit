@@ -61,7 +61,7 @@ class ClassesUpdateCommand extends Command
      * @param OutputInterface $output
      * @return int|void|null
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $inputOutput = new SymfonyStyle($input, $output);
         $bundleName = $input->getArgument('bundle');
@@ -74,5 +74,7 @@ class ClassesUpdateCommand extends Command
             $this->installerService->createClassDefinition($className, $classFile);
             $inputOutput->success(sprintf('Class %s was successfully installed!', $className));
         }
+
+        return Command::SUCCESS;
     }
 }
