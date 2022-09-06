@@ -50,13 +50,13 @@ class DeleteFolderCommand extends AbstractCommand
         $type = $input->getOption("type");
         if (!$type) {
             $output->writeln("Missing -t option.");
-            return;
+            return Command::FAILURE;
         }
 
         $path = $input->getOption("folder");
         if (!$path) {
             $output->writeln("Missing -f option.");
-            return;
+            return Command::FAILURE;
         }
 
         try {
@@ -72,7 +72,7 @@ class DeleteFolderCommand extends AbstractCommand
                     break;
                 default:
                     $output->writeln("Incorrect tree type, allowed types: object, document, asset.");
-                    return;
+                    return Command::FAILURE;
             }
 
             $output->writeln("Folder " . $path . " has been deleted.");

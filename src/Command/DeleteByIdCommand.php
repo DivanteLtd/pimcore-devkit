@@ -52,13 +52,13 @@ class DeleteByIdCommand extends AbstractCommand
         $type = $input->getOption("type");
         if (!$type) {
             $output->writeln("Missing -t option.");
-            return;
+            return Command::FAILURE;
         }
 
         $id = $input->getOption("id");
         if (!$id) {
             $output->writeln("Missing -id option.");
-            return;
+            return Command::FAILURE;
         }
 
         try {
@@ -74,7 +74,7 @@ class DeleteByIdCommand extends AbstractCommand
                     break;
                 default:
                     $output->writeln("Incorrect tree type, allowed types: object, document, asset.");
-                    return;
+                    return Command::FAILURE;
             }
 
             $output->writeln("Element " . $id . " has been deleted.");
