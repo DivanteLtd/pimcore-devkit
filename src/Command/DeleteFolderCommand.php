@@ -9,6 +9,7 @@
 namespace PimcoreDevkitBundle\Command;
 
 use Pimcore\Console\AbstractCommand;
+use Symfony\Component\Console\Command\Command;
 use Pimcore\Model\DataObject\Folder;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -44,18 +45,18 @@ class DeleteFolderCommand extends AbstractCommand
      * @param OutputInterface $output
      * @return void
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $type = $input->getOption("type");
         if (!$type) {
             $output->writeln("Missing -t option.");
-            return;
+            return Command::FAILURE;
         }
 
         $path = $input->getOption("folder");
         if (!$path) {
             $output->writeln("Missing -f option.");
-            return;
+            return Command::FAILURE;
         }
 
         try {
@@ -71,13 +72,15 @@ class DeleteFolderCommand extends AbstractCommand
                     break;
                 default:
                     $output->writeln("Incorrect tree type, allowed types: object, document, asset.");
-                    return;
+                    return Command::FAILURE;
             }
 
             $output->writeln("Folder " . $path . " has been deleted.");
         } catch (\Exception $e) {
             $output->writeln($e->getMessage());
         }
+
+        return Command::SUCCESS;
     }
 
     /**

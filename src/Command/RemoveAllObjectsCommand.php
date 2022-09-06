@@ -10,6 +10,7 @@ namespace PimcoreDevkitBundle\Command;
 
 use PimcoreDevkitBundle\Service\DataObjectService;
 use Pimcore\Console\AbstractCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -43,7 +44,7 @@ class RemoveAllObjectsCommand extends AbstractCommand
      * @return void
      * @throws \Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $classesList = $input->getOption('classes');
 
@@ -60,5 +61,7 @@ class RemoveAllObjectsCommand extends AbstractCommand
 
             $output->writeln("TOTAL REMOVED:  $cnt");
         }
+
+        return Command::SUCCESS;
     }
 }

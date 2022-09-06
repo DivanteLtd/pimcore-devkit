@@ -9,6 +9,7 @@
 namespace PimcoreDevkitBundle\Command;
 
 use Pimcore\Console\AbstractCommand;
+use Symfony\Component\Console\Command\Command;
 use Pimcore\Model\Asset;
 use Pimcore\Model\Document;
 use Pimcore\Model\DataObject\AbstractObject;
@@ -46,18 +47,18 @@ class DeleteByIdCommand extends AbstractCommand
      * @param OutputInterface $output
      * @return void
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $type = $input->getOption("type");
         if (!$type) {
             $output->writeln("Missing -t option.");
-            return;
+            return Command::FAILURE;
         }
 
         $id = $input->getOption("id");
         if (!$id) {
             $output->writeln("Missing -id option.");
-            return;
+            return Command::FAILURE;
         }
 
         try {
@@ -73,13 +74,15 @@ class DeleteByIdCommand extends AbstractCommand
                     break;
                 default:
                     $output->writeln("Incorrect tree type, allowed types: object, document, asset.");
-                    return;
+                    return Command::FAILURE;
             }
 
             $output->writeln("Element " . $id . " has been deleted.");
         } catch (\Exception $e) {
             $output->writeln($e->getMessage());
         }
+
+        return Command::SUCCESS;
     }
 
     /**

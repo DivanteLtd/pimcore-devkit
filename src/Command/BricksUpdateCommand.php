@@ -59,7 +59,7 @@ class BricksUpdateCommand extends Command
      * @param OutputInterface $output
      * @return int|void|null
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $inputOutput = new SymfonyStyle($input, $output);
         $bundleName = $input->getArgument('bundle');
@@ -74,5 +74,7 @@ class BricksUpdateCommand extends Command
             $this->installerService->createObjectBrickDefinition($brickName, $brickFile);
             $inputOutput->success(sprintf('Brick %s was successfully installed!', $brickName));
         }
+
+        return Command::SUCCESS;
     }
 }
