@@ -76,10 +76,14 @@ abstract class PimcoreBundlesFilesLocator
     {
         $finder = $this->getFinder();
         try {
-            $finder->in(sprintf('src/%s/' . static::SUBCATALOG, $bundleCatalog));
+            $finder->in(sprintf('src/%s/%s', $bundleCatalog, static::SUBCATALOG));
         } catch (DirectoryNotFoundException $exception) {
-            return [];
         }
+        try {
+            $finder->in(sprintf('app/%s', static::SUBCATALOG));
+        } catch (DirectoryNotFoundException $exception) {
+        }
+
         if (!$finder->hasResults()) {
             return [];
         }
