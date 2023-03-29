@@ -8,6 +8,8 @@
 
 namespace Tests\PimcoreDevkitBundle\FileLocator;
 
+use Pimcore\Extension\Bundle\AbstractPimcoreBundle;
+use Pimcore\Extension\Bundle\PimcoreBundleInterface;
 use PimcoreDevkitBundle\FileLocator\PimcoreBundlesFilesLocator;
 use PimcoreDevkitBundle\FileLocator\PimcoreClassLocator;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -31,7 +33,7 @@ class PimcoreClassLocatorTest extends WebTestCase
     private function createSuit(array $listOfBundles = [], $listOfPimcoreClassFiles = []): PimcoreBundlesFilesLocator
     {
         $stub = $this->createMock(PimcoreBundleManager::class);
-        $stub->method('getEnabledBundleNames')
+        $stub->method('getActiveBundles')
             ->willReturn($listOfBundles);
         $iteratorData = new \stdClass();
         $iteratorData->array = $listOfPimcoreClassFiles;
@@ -55,7 +57,7 @@ class PimcoreClassLocatorTest extends WebTestCase
             ->getMock();
         $finderMock->method('create')
             ->willReturn($finderMock);
-        $finderMock->method('in')->willReturn(null);
+        $finderMock->method('in')->willReturn($finderMock);
         $finderMock->method('hasResults')->willReturn(true);
         $iteratorMock = $this->createMock(\AppendIterator::class);
         $iteratorMock->expects($this->any())
@@ -119,8 +121,13 @@ class PimcoreClassLocatorTest extends WebTestCase
      */
     public function testGetBundleCatalogListWithSingleCustomBundle()
     {
-        $data = ['TestBundle\\TestBundle'];
-        $expected = ['AppBundle', 'TestBundle'];
+        $bundleMock = $this->getMockBuilder(AbstractPimcoreBundle::class)
+            ->setMethods(['getNiceName'])
+            ->getMock();
+        $bundleMock->method('getNiceName')->willReturn('TestBundle');
+
+        $data = [$bundleMock];
+        $expected = ['AppBundle', '', 'TestBundle'];
         $method = self::getMethod('getBundleCatalogList');
         $obj = $this->createSuit($data);
         $this->assertEquals($expected, $method->invokeArgs($obj, []));
@@ -132,7 +139,7 @@ class PimcoreClassLocatorTest extends WebTestCase
     public function testGetBundleListWithoutCustomBundle()
     {
         $data = [];
-        $expected = ['AppBundle'];
+        $expected = ['AppBundle', ''];
         $method = self::getMethod('getBundleCatalogList');
         $obj = $this->createSuit($data);
         $this->assertEquals($expected, $method->invokeArgs($obj, []));

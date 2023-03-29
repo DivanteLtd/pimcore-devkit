@@ -34,7 +34,7 @@ class WysiwygWithMetadata extends AbstractTemplateAreabrick
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return 'WYSIWYG with metadata';
     }
@@ -42,7 +42,7 @@ class WysiwygWithMetadata extends AbstractTemplateAreabrick
     /**
      * @return string|null
      */
-    public function getIcon()
+    public function getIcon(): string
     {
         return '/bundles/pimcoreadmin/img/flat-color-icons/wysiwyg.svg';
     }
@@ -52,17 +52,17 @@ class WysiwygWithMetadata extends AbstractTemplateAreabrick
      * @return \Symfony\Component\HttpFoundation\Response|void|null
      * @throws \Exception
      */
-    public function action(Info $info)
+    public function action(Info $info): ?\Symfony\Component\HttpFoundation\Response
     {
         $lang = $info->getDocument()->getProperty("language");
 
         $tag = $this->getDocumentTag($info->getDocument(), self::TAG_TYPE, self::TAG_NAME);
         if (!$tag instanceof Tag) {
-            return;
+            return null;
         }
         $html = $tag->getData();
         if (!$html) {
-            return;
+            return null;
         }
 
         $html = $this->wysiwygService->addMetaToImages($html, $lang);
@@ -74,7 +74,7 @@ class WysiwygWithMetadata extends AbstractTemplateAreabrick
      * @param Info $info
      * @return string
      */
-    public function getHtmlTagOpen(Info $info)
+    public function getHtmlTagOpen(Info $info): string
     {
         return '';
     }
@@ -83,7 +83,7 @@ class WysiwygWithMetadata extends AbstractTemplateAreabrick
      * @param Info $info
      * @return string
      */
-    public function getHtmlTagClose(Info $info)
+    public function getHtmlTagClose(Info $info): string
     {
         return '';
     }
@@ -91,7 +91,7 @@ class WysiwygWithMetadata extends AbstractTemplateAreabrick
     /**
      * @return string
      */
-    public function getTemplateLocation()
+    public function getTemplateLocation(): string
     {
         return static::TEMPLATE_LOCATION_BUNDLE;
     }
@@ -99,7 +99,7 @@ class WysiwygWithMetadata extends AbstractTemplateAreabrick
     /**
      * @return string
      */
-    public function getTemplateSuffix()
+    public function getTemplateSuffix(): string
     {
         return static::TEMPLATE_SUFFIX_TWIG;
     }

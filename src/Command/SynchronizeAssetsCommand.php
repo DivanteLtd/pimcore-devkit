@@ -53,6 +53,15 @@ class SynchronizeAssetsCommand extends AbstractCommand
         } else {
             $folder = $folder[0];
         }
+
+        if (!is_dir(PIMCORE_WEB_ROOT . '/var/assets')) {
+            mkdir(PIMCORE_WEB_ROOT . '/var/assets');
+        }
+
+        if (!is_dir(PIMCORE_WEB_ROOT . '/var/assets' . $folder)) {
+            mkdir(PIMCORE_WEB_ROOT . '/var/assets' . $folder);
+        }
+
         $files = $this->listFolderFiles(PIMCORE_WEB_ROOT . '/var/assets' . $folder);
 
         foreach ($files as $file) {
