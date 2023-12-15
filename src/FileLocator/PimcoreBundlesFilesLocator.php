@@ -61,9 +61,9 @@ abstract class PimcoreBundlesFilesLocator
      */
     private function getBundleCatalogList()
     {
-        $bundles = ['AppBundle'];
-        foreach ($this->bundleManager->getEnabledBundleNames() as $fullBundleClassName) {
-            $bundles[] = explode('\\', $fullBundleClassName)[0];
+        $bundles = ['AppBundle',''];
+        foreach ($this->bundleManager->getActiveBundles() as $activeBundle) {
+            $bundles[] = $activeBundle->getNiceName();
         }
         return $bundles;
     }
@@ -84,9 +84,15 @@ abstract class PimcoreBundlesFilesLocator
         } catch (DirectoryNotFoundException $exception) {
         }
 
-        if (!$finder->hasResults()) {
+        try {
+            /* hasResults may be only called after SUCCESSFULLY calling in or append  */
+            if (!$finder->hasResults()) {
+                return [];
+            }
+        } catch (\LogicException $exception) {
             return [];
         }
+
         $files = [];
         /** @var \SplFileInfo $file */
         foreach ($finder as $file) {

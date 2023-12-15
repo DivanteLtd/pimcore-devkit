@@ -24,7 +24,7 @@ class PimcoreDevkitBundle extends AbstractPimcoreBundle
     /**
      * @return string
      */
-    public function getNiceName()
+    public function getNiceName(): string
     {
         return 'Pimcore 5 DevKit';
     }
@@ -32,7 +32,7 @@ class PimcoreDevkitBundle extends AbstractPimcoreBundle
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return 'This is a package that contains a set of tools commonly used in many projects';
     }

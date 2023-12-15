@@ -1,90 +1,48 @@
 # Pimcore DevKit
-[![Analysis Actions](https://github.com/DivanteLtd/pimcore-devkit/workflows/Analysis/badge.svg?branch=master)](https://github.com/DivanteLtd/pimcore-devkit/actions)
-[![Tests Actions](https://github.com/DivanteLtd/pimcore-devkit/workflows/Tests/badge.svg?branch=master)](https://github.com/DivanteLtd/pimcore-devkit/actions)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/867f5904381d4e3a86bf33f2b5a99401)](https://www.codacy.com/app/Divante/pimcore-devkit?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DivanteLtd/pimcore-devkit&amp;utm_campaign=Badge_Grade)
-[![Latest Stable Version](https://poser.pugx.org/divanteltd/pimcoredevkit/v/stable)](https://packagist.org/packages/divanteltd/pimcoredevkit)
-[![Total Downloads](https://poser.pugx.org/divanteltd/pimcoredevkit/downloads)](https://packagist.org/packages/divanteltd/pimcoredevkit)
-[![License](https://poser.pugx.org/divanteltd/pimcoredevkit/license)](https://packagist.org/packages/divanteltd/pimcoredevkit)
-
-Pimcore DevKit is a set of tools that helps developing Pimcore applications. It is intended to wrap Pimcore classess 
-to enable easy use of them.
+Pimcore DevKit is a set of tools that helps developing Pimcore applications. It is intended to wrap Pimcore classess to enable easy use of them.
 
 **Table of Contents**
 
 - [Pimcore DevKit](#pimcore-devkit)
-	- [Compatibility](#compatibility)
-	- [Installing/Getting started](#installinggetting-started)
-	- [Features](#features)
-		- [Commands](#commands)
-		- [WYSIWYG with image metadata](#wysiwyg)
-	- [Contributing](#contributing)
-	- [Licensing](#licensing)
-	- [Standards & Code Quality](#standards--code-quality)
-	- [About Authors](#about-authors)
+    - [Compatibility](#compatibility)
+    - [Installing/Getting started](#installinggetting-started)
+    - [Features](#features)
+        - [Commands](#commands)
+    - [Developing](#developing)
+    - [Configuration](#configuration)
+    - [Contributing](#contributing)
+    - [Licensing](#licensing)
+    - [Standards & Code Quality](#standards--code-quality)
+    - [About Authors](#about-authors)
 
 ## Compatibility
 
-This module is compatible with Pimcore 5.3.0 and higher.
+This module is compatible with Pimcore 10.0.0 and higher.
 
 ## Installing/Getting started
 
-```bash
 composer require divanteltd/pimcoredevkit
-```
 
 ## Features
 
 ### Commands
 
-#### `devkit:asset:synchronize`
-
+####  devkit:asset:synchronize
 Synchronizes assets tree with filesystem changes
-
-#### `devkit:delete_by_id`
-
+#### devkit:delete_by_id
 Deletes object, document, asset from given tree
-
-#### `devkit:deletefolder`
-
+#### devkit:deletefolder
 Deletes folder from given tree
 
-#### `devkit:classes:update`
+## Developing
 
-Updates class definition from json
+when developing please make sure code is compatible with both Pimcore 10 and 11.
 
-#### `devkit:bricks:update`
+for test purpose there is `./scripts/test.sh` script, that check code for Pimcore 10.0, Pimcore 10.5 and Pimcore 11-Alpha7.
 
-Updates bricks definition from json
+## Configuration
 
-### WYSIWYG with metadata
-
-Standard Pimcore implementation does not use images metadata, when used in WYSIWYG.
-To enable this feature, you can use brick `WYSIWYG with metadata` which provides also simple view file.
-To use more sophisticated view (e. g. styled) you can create your own brick with a class derived from `\PimcoreDevkitBundle\Document\Areabrick\WysiwygWithMetadata`.
-Example implementation:
-```
-namespace AppBundle\Document\Areabrick;
-
-use PimcoreDevkitBundle\Document\Areabrick\WysiwygWithMetadata;
-
-class Wysiwyg extends \PimcoreDevkitBundle\Document\Areabrick\WysiwygWithMetadata
-{
-    public function getName()
-    {
-        return "WYSIWYG";
-    }
-
-    public function getIcon()
-    {
-        return '/bundles/pimcoreadmin/img/flat-color-icons/wysiwyg.svg';
-    }
-
-    public function getTemplateLocation()
-    {
-        return static::TEMPLATE_LOCATION_GLOBAL;
-    }
-}
-```
+No configuration is needed.
 
 ## Contributing
 
@@ -96,21 +54,17 @@ GPL-3.0-or-later
 
 ## Standards & Code Quality
 
-This module respects all Pimcore 5 code quality rules and our own PHPCS and PHPMD rulesets.
+This module respects all Pimcore code quality rules and our own PHPCS and PHPMD rulesets.
 
 ## About Authors
 
-![Divante-logo](http://divante.com/logo-HG.png "Divante")
+![Divante-logo](http://www.divante.com/hs-fs/hubfs/Divante_BW.png "Divante")
 
-We are a Software House from Europe, existing from 2008 and employing about 150 people. Our core competencies are 
-built around Magento, Pimcore and bespoke software projects (we love Symfony3, Node.js, Angular, React, Vue.js). 
-We specialize in sophisticated integration projects trying to connect hardcore IT with good product design and UX.
+We are a Software House from Europe, existing from 2008 and employing about 150 people. Our core competencies are built around Magento, Pimcore and bespoke software projects (we love Symfony3, Node.js, Angular, React, Vue.js). We specialize in sophisticated integration projects trying to connect hardcore IT with good product design and UX.
 
-We work for Clients like INTERSPORT, ING, Odlo, Onderdelenwinkel and CDP, the company that produced The Witcher game. 
-We develop two projects: [Open Loyalty](http://www.openloyalty.io/ "Open Loyalty") - an open source loyalty program 
-and [Vue.js Storefront](https://github.com/DivanteLtd/vue-storefront "Vue.js Storefront").
+We work for Clients like INTERSPORT, ING, Odlo, Onderdelenwinkel and CDP, the company that produced The Witcher game. We develop two projects: [Open Loyalty](http://www.openloyalty.io/ "Open Loyalty") - an open source loyalty program and [Vue.js Storefront](https://github.com/DivanteLtd/vue-storefront "Vue.js Storefront").
 
-We are part of the OEX Group which is listed on the Warsaw Stock Exchange. Our annual revenue has been growing at a 
-minimum of about 30% year on year.
+We are part of the OEX Group which is listed on the Warsaw Stock Exchange. Our annual revenue has been growing at a minimum of about 30% year on year.
 
-Visit our website [Divante.co](https://divante.com/ "Divante.com") for more information.
+Visit our website [Divante.co](https://divante.co/ "Divante.co") for more information.
+
