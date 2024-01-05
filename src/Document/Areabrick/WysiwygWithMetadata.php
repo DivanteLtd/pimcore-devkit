@@ -56,7 +56,7 @@ class WysiwygWithMetadata extends AbstractTemplateAreabrick
     {
         $lang = $info->getDocument()->getProperty("language");
 
-        $tag = $this->getDocumentTag($info->getDocument(), self::TAG_TYPE, self::TAG_NAME);
+        $tag = $this->getDocumentEditable($info->getDocument(), self::TAG_TYPE, self::TAG_NAME);
         if (!$tag instanceof Tag) {
             return null;
         }
