@@ -3,7 +3,7 @@
 namespace PimcoreDevkitBundle\Document\Areabrick;
 
 use Pimcore\Model\Document\Editable\Area\Info;
-use Pimcore\Model\Document\Tag;
+use Pimcore\Model\Document\Editable\Wysiwyg;
 use PimcoreDevkitBundle\Service\Wysiwyg\WysiwygService;
 use Pimcore\Extension\Document\Areabrick\AbstractTemplateAreabrick;
 use Pimcore\Model\Asset;
@@ -57,7 +57,7 @@ class WysiwygWithMetadata extends AbstractTemplateAreabrick
         $lang = $info->getDocument()->getProperty("language");
 
         $tag = $this->getDocumentEditable($info->getDocument(), self::TAG_TYPE, self::TAG_NAME);
-        if (!$tag instanceof Tag) {
+        if (!$tag instanceof Wysiwyg) {
             return null;
         }
         $html = $tag->getData();
@@ -68,6 +68,8 @@ class WysiwygWithMetadata extends AbstractTemplateAreabrick
         $html = $this->wysiwygService->addMetaToImages($html, $lang);
 
         $tag->setDataFromResource($html);
+
+        return null;
     }
 
     /**
